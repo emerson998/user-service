@@ -1,6 +1,6 @@
 # Task 02 — domain.repository.UserRepository (port)
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 01.
 
@@ -29,6 +29,6 @@ public interface UserRepository {
 
 ## Critérios de aceite
 
-- [ ] Nenhuma dependência de `org.springframework.data.*` neste arquivo.
+- [x] Nenhuma dependência de `org.springframework.data.*` neste arquivo.
 - [ ] Usado por `UserService` (task 08) e implementado por
-      `UserRepositoryAdapter` (task 12).
+      `UserRepositoryAdapter` (task 12) — pendente, ainda não começaram.

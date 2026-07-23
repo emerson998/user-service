@@ -1,6 +1,6 @@
 # Task 03 — Exceções de domínio
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 ## Objetivo
 
@@ -27,7 +27,9 @@ desta feature).
 
 ## Critérios de aceite
 
-- [ ] `ResourceNotFoundException` → mapeada para 404 na task 15.
-- [ ] `DuplicateResourceException` → mapeada para 409 na task 15.
+- [x] Ambas criadas, com construtor `(String message)` e
+      `(String resource, Object id)`.
+- [ ] `ResourceNotFoundException` → mapeada para 404 na task 15 — pendente.
+- [ ] `DuplicateResourceException` → mapeada para 409 na task 15 — pendente.
 - [ ] Usadas por `UserService` (task 08): not-found em `getById`/`update`/`delete`,
-      duplicate em `create`/`update` (e-mail já existe).
+      duplicate em `create`/`update` (e-mail já existe) — pendente.
