@@ -20,18 +20,18 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 - [x] [05 — UserMapper](05-application-mapper.md)
 - [x] [06 — UserUseCase (port.in)](06-application-port-in-usecase.md)
 - [x] [07 — PasswordEncoderPort (port.out)](07-application-port-out-password-encoder.md)
-- [ ] [08 — UserService](08-application-service.md)
-- [ ] [09 — UserJpaEntity](09-infra-persistence-entity.md)
-- [ ] [10 — UserJpaRepository](10-infra-persistence-jpa-repository.md)
-- [ ] [11 — UserEntityMapper](11-infra-persistence-entity-mapper.md)
-- [ ] [12 — UserRepositoryAdapter](12-infra-persistence-adapter.md)
-- [ ] [13 — BCryptPasswordEncoderAdapter](13-infra-security-bcrypt-adapter.md)
+- [x] [08 — UserService](08-application-service.md)
+- [x] [09 — UserJpaEntity](09-infra-persistence-entity.md)
+- [x] [10 — UserJpaRepository](10-infra-persistence-jpa-repository.md)
+- [x] [11 — UserEntityMapper](11-infra-persistence-entity-mapper.md)
+- [x] [12 — UserRepositoryAdapter](12-infra-persistence-adapter.md)
+- [x] [13 — BCryptPasswordEncoderAdapter](13-infra-security-bcrypt-adapter.md)
 - [ ] [14 — UserController](14-web-controller.md)
 - [ ] [15 — GlobalExceptionHandler](15-web-exception-handler.md)
 - [ ] [16 — Testes (domain/service/controller)](16-tests-domain-application-web.md)
 - [ ] [17 — Validação manual do baseline](17-baseline-manual-validation.md)
 
-Status geral: 8/18 concluídas.
+Status geral: 14/18 concluídas.
 
 > ⚠️ Nenhuma compilação/teste foi verificada neste ambiente (sem acesso
 > admin para rodar `./mvnw`/Maven). O código das tasks concluídas foi

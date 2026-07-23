@@ -1,6 +1,6 @@
 # Task 11 — infrastructure.persistence.mapper.UserEntityMapper
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 01, 09.
 
@@ -26,7 +26,7 @@ novo.
 
 ## Critérios de aceite
 
-- [ ] Round-trip `toDomain(toEntity(user))` preserva todos os campos
-      (útil como caso de teste, mesmo que informal, dentro de
-      `UserRepositoryAdapter` se houver teste de integração de
-      persistência).
+- [x] `toEntity` preserva o `id` recebido (não gera um novo).
+- [ ] Round-trip `toDomain(toEntity(user))` preserva todos os campos —
+      pendente de teste formal (task 16 não cobre este mapper
+      explicitamente; considerar adicionar se houver tempo).

@@ -1,6 +1,6 @@
 # Task 12 — infrastructure.persistence.adapter.UserRepositoryAdapter
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 02, 09, 10, 11.
 
@@ -27,5 +27,8 @@ satisfaz).
 
 ## Critérios de aceite
 
-- [ ] Nenhum vazamento de `UserJpaEntity` para fora deste arquivo.
-- [ ] `UserService` (task 08) só conhece `domain.repository.UserRepository`.
+- [x] Nenhum vazamento de `UserJpaEntity` para fora deste arquivo.
+- [x] `UserService` (task 08) só conhece `domain.repository.UserRepository`.
+- [ ] `UsuariosServiceApplicationTests.contextLoads` volta a passar —
+      pendente de confirmação (depende também da task 13, feita em
+      seguida).

@@ -1,6 +1,6 @@
 # Task 08 — application.service.UserService
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 01, 02, 03, 04, 05, 06, 07.
 
@@ -35,8 +35,16 @@ construtor (nunca `@Autowired` em campo).
 
 ## Critérios de aceite
 
-- [ ] Nenhum `@Autowired` em campo — só construtor.
-- [ ] Regra de e-mail duplicado coberta em `create` e (se a decisão da
-      task 04 permitir trocar e-mail) em `update`.
-- [ ] Coberto por `UserServiceTest` (task 16): sucesso, duplicidade,
-      not-found.
+- [x] Nenhum `@Autowired` em campo — só construtor.
+- [x] Regra de e-mail duplicado coberta em `create` (não se aplica a
+      `update`, já que `UserUpdateRequest` não carrega e-mail — decisão
+      da task 04).
+- [ ] Coberto por `UserServiceTest` (task 16) — pendente, task 16 ainda
+      não começou.
+
+## Nota de implementação
+
+`UserRepository` não expõe transações — `save`/`findById`/etc. dependem
+de `UserRepositoryAdapter` (task 12) e `UserJpaRepository` (task 10)
+existirem para rodar de verdade; até lá o service compila mas não tem
+implementação de infraestrutura por trás.

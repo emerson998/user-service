@@ -1,6 +1,6 @@
 # Task 13 — infrastructure.security.BCryptPasswordEncoderAdapter
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 00, 07.
 
@@ -33,6 +33,8 @@ public class BCryptPasswordEncoderAdapter implements PasswordEncoderPort {
 
 ## Critérios de aceite
 
-- [ ] Único ponto do código que importa
+- [x] Único ponto do código que importa
       `org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder`.
-- [ ] `./mvnw compile` funciona após a task 00 adicionar a dependência.
+- [ ] `./mvnw compile`/`./mvnw test` a rodar pelo usuário para confirmar
+      que `contextLoads` volta a passar agora que `UserRepository` (task 12)
+      e `PasswordEncoderPort` (esta task) têm implementação concreta.

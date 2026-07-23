@@ -1,6 +1,6 @@
 # Task 10 — infrastructure.persistence.repository.UserJpaRepository
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 09.
 
@@ -23,4 +23,4 @@ public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
 
 ## Critérios de aceite
 
-- [ ] Usado só por `UserRepositoryAdapter` (task 12).
+- [x] Usado só por `UserRepositoryAdapter` (task 12).
