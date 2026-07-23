@@ -50,3 +50,4 @@
 - `2026-07-23T19:30:50.065664+00:00` **fix** — incidente #130 resolvido — diagnostico: A causa raiz provavel e que o objeto User possui um atributo nome nulo, o que esta causando uma NullPointerException ao tentar chamar o metodo trim() nele, isso pode estar relacionado a uma falha na v
 - `2026-07-23T20:33:38.866068+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-23T20:35:44.308091+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:38:51.058970+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
