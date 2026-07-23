@@ -16,3 +16,4 @@
 - `2026-07-23T17:21:47.375825+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo nome como null, o que está causando uma NullPointerException quando se tenta chamar o método trim() nele, isso pode estar acontecendo devi
 - `2026-07-23T17:28:40.744868+00:00` **test-toggle** — valida commit real incluindo UserMapper.java (extra_paths)
 - `2026-07-23T17:31:00.677133+00:00` **chaos** — incidente #8 — NullPointerException em /api/v1/users
+- `2026-07-23T17:31:04.857210+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
