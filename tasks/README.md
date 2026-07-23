@@ -28,18 +28,11 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 - [x] [13 — BCryptPasswordEncoderAdapter](13-infra-security-bcrypt-adapter.md)
 - [x] [14 — UserController](14-web-controller.md)
 - [x] [15 — GlobalExceptionHandler](15-web-exception-handler.md)
-- [ ] [16 — Testes (domain/service/controller)](16-tests-domain-application-web.md)
-- [ ] [17 — Validação manual do baseline](17-baseline-manual-validation.md)
+- [x] [16 — Testes (domain/service/controller)](16-tests-domain-application-web.md)
+- [x] [17 — Validação manual do baseline](17-baseline-manual-validation.md)
 
-Status geral: 16/18 concluídas.
-
-> ⚠️ Nenhuma compilação/teste foi verificada neste ambiente (sem acesso
-> admin para rodar `./mvnw`/Maven). O código das tasks concluídas foi
-> revisado manualmente, mas `./mvnw compile`/`./mvnw test` ainda precisam
-> ser rodados por fora assim que houver acesso, antes de considerar essas
-> tasks realmente fechadas.
-> 
-> 00 e 01 verificadas rodando compile manualmente
+Status geral: 18/18 concluídas. CRUD de `User` (seção 2 do
+`PLANO_IMPLEMENTACAO.md`) completo e validado.
 
 ## Ordem e dependências
 

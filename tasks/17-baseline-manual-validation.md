@@ -1,6 +1,7 @@
 # Task 17 — Validação manual do baseline saudável
 
-Status: [ ] Não iniciada
+Status: [x] Concluída — todos os endpoints testados manualmente pelo
+usuário e funcionando (`POST`/`GET`/`PUT`/`DELETE` + Swagger UI).
 
 Depende de: Task 16.
 
@@ -25,7 +26,8 @@ seção 3 do plano).
 
 ## Critérios de aceite
 
-- [ ] Todos os 6 passos acima executados com sucesso, sem nenhum registro
+- [x] Todos os 6 passos acima executados com sucesso, sem nenhum registro
       corrompido e sem nenhum mecanismo de chaos armado.
-- [ ] Resultado registrado aqui (data + observações), já que é a
-      evidência de que a seção 2 do plano está de fato concluída.
+- [x] Resultado: confirmado pelo usuário em 2026-07-23 — todos os
+      endpoints do CRUD funcionando corretamente, evidência de que a
+      seção 2 do plano está de fato concluída.

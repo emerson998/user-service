@@ -1,6 +1,6 @@
 # Task 16 — Testes (domain / application / web)
 
-Status: [ ] Não iniciada
+Status: [x] Concluída e verificada — `./mvnw test` verde
 
 Depende de: Task 01 até 15.
 
@@ -42,5 +42,10 @@ teste de `AGENTS.md` § "Testes".
 
 ## Critérios de aceite
 
-- [ ] `./mvnw test` verde.
-- [ ] Casos de sucesso e de erro cobertos em cada camada listada acima.
+- [x] `./mvnw test` verde — confirmado pelo usuário (após corrigir o
+      import de `@WebMvcTest` para `org.springframework.boot.webmvc.test.autoconfigure`
+      e trocar o `ObjectMapper` autowired por uma instância local no
+      `UserControllerTest`).
+- [x] Casos de sucesso e de erro cobertos em cada camada listada acima
+      (incluindo um teste extra de `update` com sucesso em
+      `UserServiceTest`, além dos casos originalmente listados).

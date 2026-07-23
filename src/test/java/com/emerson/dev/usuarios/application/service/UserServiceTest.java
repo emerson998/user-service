@@ -1,0 +1,126 @@
+package com.emerson.dev.usuarios.application.service;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.emerson.dev.usuarios.application.dto.user.UserRequest;
+import com.emerson.dev.usuarios.application.dto.user.UserResponse;
+import com.emerson.dev.usuarios.application.dto.user.UserUpdateRequest;
+import com.emerson.dev.usuarios.application.port.out.PasswordEncoderPort;
+import com.emerson.dev.usuarios.domain.exception.DuplicateResourceException;
+import com.emerson.dev.usuarios.domain.exception.ResourceNotFoundException;
+import com.emerson.dev.usuarios.domain.model.User;
+import com.emerson.dev.usuarios.domain.repository.UserRepository;
+
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private PasswordEncoderPort passwordEncoderPort;
+
+    @InjectMocks
+    private UserService userService;
+
+    @Test
+    void create_shouldEncodePasswordAndSaveUser_whenEmailNotTaken() {
+        UserRequest request = new UserRequest("Alice", "alice@example.com", "password123", null, null);
+        User saved = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+        when(passwordEncoderPort.encode(request.password())).thenReturn("hashed");
+        when(userRepository.save(any(User.class))).thenReturn(saved);
+
+        UserResponse response = userService.create(request);
+
+        assertThat(response.id()).isEqualTo(1L);
+        assertThat(response.name()).isEqualTo("Alice");
+        verify(passwordEncoderPort).encode("password123");
+        verify(userRepository).save(any(User.class));
+    }
+
+    @Test
+    void create_shouldThrowDuplicateResourceException_whenEmailAlreadyExists() {
+        UserRequest request = new UserRequest("Alice", "alice@example.com", "password123", null, null);
+        User existing = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.of(existing));
+
+        assertThatThrownBy(() -> userService.create(request))
+                .isInstanceOf(DuplicateResourceException.class);
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void getById_shouldThrowResourceNotFoundException_whenUserDoesNotExist() {
+        when(userRepository.findById(99L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> userService.getById(99L))
+                .isInstanceOf(ResourceNotFoundException.class);
+    }
+
+    @Test
+    void update_shouldThrowResourceNotFoundException_whenUserDoesNotExist() {
+        UserUpdateRequest request = new UserUpdateRequest("Alice", null, null);
+        when(userRepository.findById(99L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> userService.update(99L, request))
+                .isInstanceOf(ResourceNotFoundException.class);
+    }
+
+    @Test
+    void update_shouldUpdateProfile_whenUserExists() {
+        User existing = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        UserUpdateRequest request = new UserUpdateRequest("Alice Smith", "+55 11 99999-0000", "bio");
+        when(userRepository.findById(1L)).thenReturn(Optional.of(existing));
+        when(userRepository.save(any(User.class))).thenReturn(existing);
+
+        UserResponse response = userService.update(1L, request);
+
+        assertThat(response.name()).isEqualTo("Alice Smith");
+        assertThat(response.phone()).isEqualTo("+55 11 99999-0000");
+        assertThat(response.bio()).isEqualTo("bio");
+    }
+
+    @Test
+    void delete_shouldThrowResourceNotFoundException_whenUserDoesNotExist() {
+        when(userRepository.existsById(99L)).thenReturn(false);
+
+        assertThatThrownBy(() -> userService.delete(99L))
+                .isInstanceOf(ResourceNotFoundException.class);
+
+        verify(userRepository, never()).deleteById(any());
+    }
+
+    @Test
+    void listAll_shouldReturnEmptyList_whenNoUsersExist() {
+        when(userRepository.findAll()).thenReturn(List.of());
+
+        assertThat(userService.listAll()).isEmpty();
+    }
+
+    @Test
+    void listAll_shouldReturnMappedUsers_whenUsersExist() {
+        User user = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        when(userRepository.findAll()).thenReturn(List.of(user));
+
+        List<UserResponse> result = userService.listAll();
+
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).email()).isEqualTo("alice@example.com");
+    }
+}
