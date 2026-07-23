@@ -95,3 +95,4 @@
 - `2026-07-23T21:42:18.381242+00:00` **chaos** — incidente #11 — NullPointerException em /api/v1/users
 - `2026-07-23T21:45:18.898128+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
 - `2026-07-23T21:47:18.370420+00:00` **chaos** — incidente #3 — NullPointerException em /api/v1/users
+- `2026-07-23T21:48:18.404951+00:00` **chaos** — incidente #4 — NullPointerException em /api/v1/users
