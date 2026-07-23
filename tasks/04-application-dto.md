@@ -1,6 +1,6 @@
 # Task 04 — DTOs UserRequest/UserResponse
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 01.
 
@@ -67,6 +67,8 @@ implementadas):
 
 ## Critérios de aceite
 
-- [ ] `UserRequest` usado só em `create`; `UserUpdateRequest` só em
-      `update`.
-- [ ] `UserResponse` não tem campo de senha em nenhuma forma (nem hash).
+- [x] `UserRequest`, `UserUpdateRequest` e `UserResponse` criados
+      conforme especificado acima. `UserRequest`/`UserUpdateRequest` só
+      serão efetivamente usados em `create`/`update` a partir das tasks
+      06/08/14 (pendentes).
+- [x] `UserResponse` não tem campo de senha em nenhuma forma (nem hash).

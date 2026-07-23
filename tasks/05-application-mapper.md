@@ -1,6 +1,6 @@
 # Task 05 — application.mapper.UserMapper
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 01, 04.
 
@@ -34,5 +34,5 @@ public static UserResponse toResponse(User user) {
 
 ## Critérios de aceite
 
-- [ ] Classe `final` com construtor privado (não é um `@Component`).
-- [ ] Sem dependência de Spring.
+- [x] Classe `final` com construtor privado (não é um `@Component`).
+- [x] Sem dependência de Spring.
