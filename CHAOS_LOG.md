@@ -29,3 +29,4 @@
 - `2026-07-23T17:43:29.046095+00:00` **chaos** — incidente #28 — NullPointerException em /api/v1/users
 - `2026-07-23T17:43:37.397616+00:00` **fix** — incidente #28 resolvido — diagnostico: a causa raiz provavel e que o objeto User possui um atributo nome nulo, o que esta causando a excecao NullPointerException quando se tenta chamar o metodo trim() nele, isso pode ocorrer devido a uma f
 - `2026-07-23T17:46:07.056908+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T17:46:29.036117+00:00` **chaos** — incidente #35 — NullPointerException em /api/v1/users
