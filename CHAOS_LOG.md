@@ -24,3 +24,4 @@
 - `2026-07-23T17:32:50.474894+00:00` **chaos** — incidente #2 — ObjectOptimisticLockingFailureException em /internal/chaos/users-flow/mitigate
 - `2026-07-23T17:36:19.076545+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-23T17:38:16.769969+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:38:49.393699+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel e que o objeto User esta sendo retornado com o atributo name como null, o que esta causando um NullPointerException quando se tenta chamar o metodo trim() nesse atributo.
