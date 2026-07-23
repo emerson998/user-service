@@ -130,3 +130,4 @@
 - `2026-07-23T23:43:34.865180+00:00` **chaos** — incidente #65 — NullPointerException em /api/v1/users
 - `2026-07-23T23:44:36.581088+00:00` **chaos** — incidente #77 — NullPointerException em /api/v1/users
 - `2026-07-23T23:44:54.290199+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T23:45:27.461442+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
