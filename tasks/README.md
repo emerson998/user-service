@@ -26,12 +26,12 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 - [x] [11 — UserEntityMapper](11-infra-persistence-entity-mapper.md)
 - [x] [12 — UserRepositoryAdapter](12-infra-persistence-adapter.md)
 - [x] [13 — BCryptPasswordEncoderAdapter](13-infra-security-bcrypt-adapter.md)
-- [ ] [14 — UserController](14-web-controller.md)
-- [ ] [15 — GlobalExceptionHandler](15-web-exception-handler.md)
+- [x] [14 — UserController](14-web-controller.md)
+- [x] [15 — GlobalExceptionHandler](15-web-exception-handler.md)
 - [ ] [16 — Testes (domain/service/controller)](16-tests-domain-application-web.md)
 - [ ] [17 — Validação manual do baseline](17-baseline-manual-validation.md)
 
-Status geral: 14/18 concluídas.
+Status geral: 16/18 concluídas.
 
 > ⚠️ Nenhuma compilação/teste foi verificada neste ambiente (sem acesso
 > admin para rodar `./mvnw`/Maven). O código das tasks concluídas foi

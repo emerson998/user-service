@@ -1,6 +1,6 @@
 # Task 15 — web.exception.GlobalExceptionHandler
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 03.
 
@@ -39,8 +39,8 @@ handler precisar de 422 no futuro, usar `HttpStatus.valueOf(422)`
 
 ## Critérios de aceite
 
-- [ ] Os 4 handlers acima implementados.
-- [ ] Nenhuma exceção de infraestrutura vaza como stack trace cru para o
-      cliente.
+- [x] Os 4 handlers acima implementados.
+- [x] Nenhuma exceção de infraestrutura vaza como stack trace cru para o
+      cliente (handler genérico devolve mensagem fixa, loga o resto).
 - [ ] Coberto por teste (`GlobalExceptionHandlerTest` ou via
-      `UserControllerTest`, task 16).
+      `UserControllerTest`, task 16) — pendente.

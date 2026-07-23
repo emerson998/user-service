@@ -1,6 +1,6 @@
 # Task 14 — web.controller.UserController
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 04, 06, 08.
 
@@ -34,6 +34,7 @@ Endpoints REST do CRUD, conforme `PLANO_IMPLEMENTACAO.md` § 2.3.
 
 ## Critérios de aceite
 
-- [ ] Todas as rotas da tabela implementadas.
-- [ ] Coberto por `UserControllerTest` (task 16).
-- [ ] Base para a validação manual da task 17.
+- [x] Todas as rotas da tabela implementadas (`POST` retorna 201 com
+      header `Location`).
+- [ ] Coberto por `UserControllerTest` (task 16) — pendente.
+- [ ] Base para a validação manual da task 17 — pendente.
