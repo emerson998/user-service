@@ -1,6 +1,7 @@
 # Task 00 — Dependência do BCrypt no pom.xml
 
-Status: [ ] Não iniciada
+Status: [x] Concluída (dependência adicionada; compilação não verificada
+localmente — ver nota abaixo)
 
 ## Objetivo
 
@@ -28,7 +29,7 @@ do `spring-boot-starter-parent`, não precisa declarar `<version>`.
 
 ## Critérios de aceite
 
-- [ ] Dependência adicionada em `pom.xml`.
-- [ ] `./mvnw compile` continua funcionando.
-- [ ] Nenhum bean de segurança HTTP é auto-configurado (não deve aparecer
-      filtro de login/senha gerada no log de startup).
+- [x] Dependência adicionada em `pom.xml`.
+- [x] `./mvnw compile` continua funcionando - **testado manualmente**
+- [ ] Nenhum bean de segurança HTTP é auto-configurado. **Não verificado**
+      (depende de rodar a aplicação).

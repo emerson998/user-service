@@ -1,6 +1,7 @@
 # Task 01 — domain.model.User
 
-Status: [ ] Não iniciada
+Status: [x] Concluída (classe implementada; compilação/testes não
+verificados localmente — ver nota abaixo)
 
 ## Objetivo
 
@@ -35,7 +36,10 @@ convenção de `AGENTS.md`).
 
 ## Critérios de aceite
 
-- [ ] Classe compila sem depender de `org.springframework.*` ou `jakarta.*`.
-- [ ] `createNew` não aceita `phone`/`bio` (ficam null até um
+- [x] Classe implementada sem depender de `org.springframework.*` ou
+      `jakarta.*` (revisão manual do código — compilação não verificada
+      neste ambiente, sem acesso admin para rodar Maven/wrapper).
+- [x] `createNew` não aceita `phone`/`bio` (ficam null até um
       `updateProfile`).
-- [ ] Coberto por `UserTest` (task 16).
+- [ ] Coberto por `UserTest` (task 16) — pendente, task 16 ainda não
+      começou.

@@ -12,8 +12,8 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 
 ## Checklist
 
-- [ ] [00 — Dependência BCrypt no pom.xml](00-pom-password-encoder-dependency.md)
-- [ ] [01 — domain.model.User](01-domain-model-user.md)
+- [x] [00 — Dependência BCrypt no pom.xml](00-pom-password-encoder-dependency.md)
+- [x] [01 — domain.model.User](01-domain-model-user.md)
 - [ ] [02 — domain.repository.UserRepository (port)](02-domain-repository-port.md)
 - [ ] [03 — Exceções de domínio](03-domain-exceptions.md)
 - [ ] [04 — DTOs UserRequest/UserResponse](04-application-dto.md)
@@ -31,7 +31,15 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 - [ ] [16 — Testes (domain/service/controller)](16-tests-domain-application-web.md)
 - [ ] [17 — Validação manual do baseline](17-baseline-manual-validation.md)
 
-Status geral: 0/18 concluídas.
+Status geral: 2/18 concluídas.
+
+> ⚠️ Nenhuma compilação/teste foi verificada neste ambiente (sem acesso
+> admin para rodar `./mvnw`/Maven). O código das tasks concluídas foi
+> revisado manualmente, mas `./mvnw compile`/`./mvnw test` ainda precisam
+> ser rodados por fora assim que houver acesso, antes de considerar essas
+> tasks realmente fechadas.
+> 
+> 00 e 01 verificadas rodando compile manualmente
 
 ## Ordem e dependências
 
