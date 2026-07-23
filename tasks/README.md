@@ -18,8 +18,8 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 - [x] [03 — Exceções de domínio](03-domain-exceptions.md)
 - [x] [04 — DTOs UserRequest/UserResponse](04-application-dto.md)
 - [x] [05 — UserMapper](05-application-mapper.md)
-- [ ] [06 — UserUseCase (port.in)](06-application-port-in-usecase.md)
-- [ ] [07 — PasswordEncoderPort (port.out)](07-application-port-out-password-encoder.md)
+- [x] [06 — UserUseCase (port.in)](06-application-port-in-usecase.md)
+- [x] [07 — PasswordEncoderPort (port.out)](07-application-port-out-password-encoder.md)
 - [ ] [08 — UserService](08-application-service.md)
 - [ ] [09 — UserJpaEntity](09-infra-persistence-entity.md)
 - [ ] [10 — UserJpaRepository](10-infra-persistence-jpa-repository.md)
@@ -31,7 +31,7 @@ Escopo: só a seção 2 do `PLANO_IMPLEMENTACAO.md` (CRUD). O chaos
 - [ ] [16 — Testes (domain/service/controller)](16-tests-domain-application-web.md)
 - [ ] [17 — Validação manual do baseline](17-baseline-manual-validation.md)
 
-Status geral: 6/18 concluídas.
+Status geral: 8/18 concluídas.
 
 > ⚠️ Nenhuma compilação/teste foi verificada neste ambiente (sem acesso
 > admin para rodar `./mvnw`/Maven). O código das tasks concluídas foi

@@ -1,6 +1,6 @@
 # Task 06 — application.port.in.UserUseCase
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 Depende de: Task 04.
 
@@ -31,5 +31,5 @@ para CRUD simples).
 
 ## Critérios de aceite
 
-- [ ] `update` recebe `UserUpdateRequest` (decisão da task 04, opção 2).
-- [ ] Implementada por `UserService` (task 08).
+- [x] `update` recebe `UserUpdateRequest` (decisão da task 04, opção 2).
+- [ ] Implementada por `UserService` (task 08) — pendente.

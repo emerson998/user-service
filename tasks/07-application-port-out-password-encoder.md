@@ -1,6 +1,6 @@
 # Task 07 — application.port.out.PasswordEncoderPort
 
-Status: [ ] Não iniciada
+Status: [x] Concluída
 
 ## Objetivo
 
@@ -22,6 +22,6 @@ public interface PasswordEncoderPort {
 
 ## Critérios de aceite
 
-- [ ] Sem import de `org.springframework.security.*` nesta interface.
-- [ ] Implementado por `BCryptPasswordEncoderAdapter` (task 13).
-- [ ] Injetado (via construtor) em `UserService` (task 08).
+- [x] Sem import de `org.springframework.security.*` nesta interface.
+- [ ] Implementado por `BCryptPasswordEncoderAdapter` (task 13) — pendente.
+- [ ] Injetado (via construtor) em `UserService` (task 08) — pendente.
