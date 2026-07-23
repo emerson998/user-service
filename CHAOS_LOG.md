@@ -18,3 +18,4 @@
 - `2026-07-23T17:31:00.677133+00:00` **chaos** — incidente #8 — NullPointerException em /api/v1/users
 - `2026-07-23T17:31:04.857210+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
 - `2026-07-23T17:31:09.639965+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando a exceção NullPointerException quando se tenta chamar o método trim() nesse atributo.
+- `2026-07-23T17:32:35.326485+00:00` **chaos** — incidente #8 — NullPointerException em /api/v1/users
