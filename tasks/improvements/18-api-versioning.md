@@ -1,6 +1,6 @@
 # Task 18 — API Versioning
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: baseline CRUD (tasks 00–17).
 
@@ -30,8 +30,9 @@ a string literal em cada classe.
 
 ## Critérios de aceite
 
-- [ ] `ApiRoutes.V1` existe e vale `"/api/v1"`.
-- [ ] `UserController` usa a constante — nenhum literal `/api/v1` restante
+- [x] `ApiRoutes.V1` existe e vale `"/api/v1"`.
+- [x] `UserController` usa a constante — nenhum literal `/api/v1` restante
       fora de `ApiRoutes`.
-- [ ] `./mvnw test` continua passando (nenhuma rota mudou de valor
-      observável, só a origem do valor).
+- [x] `./mvnw test` continua passando (nenhuma rota mudou de valor
+      observável, só a origem do valor). **Confirmado pelo usuário**:
+      `mvn clean compile` e `mvn test` rodados manualmente no IntelliJ.

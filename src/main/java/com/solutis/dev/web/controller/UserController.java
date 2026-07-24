@@ -16,14 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.solutis.dev.application.dto.user.UserRequest;
 import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpdateRequest;
+import com.solutis.dev.application.dto.user.UserUpsertRequest;
 import com.solutis.dev.application.port.in.UserUseCase;
+import com.solutis.dev.web.ApiRoutes;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping(ApiRoutes.V1 + "/users")
 @Tag(name = "Users")
 public class UserController {
 
@@ -56,6 +58,12 @@ public class UserController {
     @Operation(summary = "Atualiza o perfil de um usuário")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
         return ResponseEntity.ok(userUseCase.update(id, request));
+    }
+
+    @PutMapping("/upsert")
+    @Operation(summary = "Cria ou atualiza um usuário (upsert por e-mail)")
+    public ResponseEntity<UserResponse> upsert(@Valid @RequestBody UserUpsertRequest request) {
+        return ResponseEntity.ok(userUseCase.upsert(request));
     }
 
     @DeleteMapping("/{id}")

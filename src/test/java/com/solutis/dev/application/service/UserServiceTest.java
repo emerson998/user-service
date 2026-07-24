@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.solutis.dev.application.dto.user.UserRequest;
 import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpdateRequest;
+import com.solutis.dev.application.dto.user.UserUpsertRequest;
 import com.solutis.dev.application.port.out.PasswordEncoderPort;
 import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
@@ -94,6 +95,60 @@ class UserServiceTest {
         assertThat(response.name()).isEqualTo("Alice Smith");
         assertThat(response.phone()).isEqualTo("+55 11 99999-0000");
         assertThat(response.bio()).isEqualTo("bio");
+    }
+
+    @Test
+    void upsert_shouldCreateUser_whenEmailNotFoundAndPasswordProvided() {
+        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "password123", null, null);
+        User saved = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+        when(passwordEncoderPort.encode(request.password())).thenReturn("hashed");
+        when(userRepository.save(any(User.class))).thenReturn(saved);
+
+        UserResponse response = userService.upsert(request);
+
+        assertThat(response.id()).isEqualTo(1L);
+        assertThat(response.email()).isEqualTo("alice@example.com");
+        verify(passwordEncoderPort).encode("password123");
+    }
+
+    @Test
+    void upsert_shouldThrowIllegalArgumentException_whenCreatingWithoutPassword() {
+        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", null, null, null);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> userService.upsert(request))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void upsert_shouldUpdateProfileWithoutChangingPassword_whenEmailExistsAndPasswordBlank() {
+        User existing = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        UserUpsertRequest request = new UserUpsertRequest("Alice Smith", "alice@example.com", null, "+55 11 99999-0000", "bio");
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.of(existing));
+        when(userRepository.save(any(User.class))).thenReturn(existing);
+
+        UserResponse response = userService.upsert(request);
+
+        assertThat(response.name()).isEqualTo("Alice Smith");
+        assertThat(response.phone()).isEqualTo("+55 11 99999-0000");
+        verify(passwordEncoderPort, never()).encode(any());
+    }
+
+    @Test
+    void upsert_shouldChangePassword_whenEmailExistsAndPasswordProvided() {
+        User existing = new User(1L, "Alice", "alice@example.com", "oldHash", null, null, true);
+        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "newPassword123", null, null);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.of(existing));
+        when(passwordEncoderPort.encode("newPassword123")).thenReturn("newHash");
+        when(userRepository.save(any(User.class))).thenReturn(existing);
+
+        userService.upsert(request);
+
+        verify(passwordEncoderPort).encode("newPassword123");
+        assertThat(existing.getPasswordHash()).isEqualTo("newHash");
     }
 
     @Test

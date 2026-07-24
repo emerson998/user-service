@@ -1,6 +1,6 @@
 # Task 19 — Upsert Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 18, baseline CRUD (`UserService`, `UserRepository`,
 `UserController`).
@@ -40,18 +40,17 @@ baseline).
 - Rota: `PUT ApiRoutes.V1 + "/users/upsert"` em `UserController` (rota
   própria, sem id no path, para não colidir com `PUT /{id}`).
 
-## Nota de implementação — decisão assumida, confirmar antes de codificar
+## Nota de implementação — decisão confirmada
 
-O ponto "senha obrigatória só na criação, opcional na atualização" é uma
-decisão razoável mas **não estava no checklist original** — confirmar com
-o usuário antes de implementar, seguindo a regra de `AGENTS.md` sobre não
-decidir silenciosamente decisões de design não cobertas.
+"Senha obrigatória só na criação, opcional na atualização" — confirmado
+com o usuário em 2026-07-24.
 
 ## Critérios de aceite
 
-- [ ] `PUT /api/v1/users/upsert` cria usuário novo quando o e-mail não
+- [x] `PUT /api/v1/users/upsert` cria usuário novo quando o e-mail não
       existe (senha obrigatória).
-- [ ] Mesma rota atualiza nome/telefone/bio (e senha, se enviada) quando o
+- [x] Mesma rota atualiza nome/telefone/bio (e senha, se enviada) quando o
       e-mail já existe.
-- [ ] Coberto por teste em `UserServiceTest` (branch create e branch
-      update).
+- [x] Coberto por teste em `UserServiceTest` (branch create e branch
+      update). **Confirmado pelo usuário**: `mvn clean compile` e
+      `mvn test` rodados manualmente no IntelliJ.

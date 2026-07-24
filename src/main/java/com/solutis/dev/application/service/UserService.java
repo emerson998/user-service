@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.solutis.dev.application.dto.user.UserRequest;
 import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpdateRequest;
+import com.solutis.dev.application.dto.user.UserUpsertRequest;
 import com.solutis.dev.application.mapper.UserMapper;
 import com.solutis.dev.application.port.in.UserUseCase;
 import com.solutis.dev.application.port.out.PasswordEncoderPort;
@@ -44,6 +45,30 @@ public class UserService implements UserUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
         user.updateProfile(request.name(), request.phone(), request.bio());
         User saved = userRepository.save(user);
+        return UserMapper.toResponse(saved);
+    }
+
+    @Override
+    public UserResponse upsert(UserUpsertRequest request) {
+        return userRepository.findByEmail(request.email())
+                .map(existing -> updateExisting(existing, request))
+                .orElseGet(() -> createFromUpsert(request));
+    }
+
+    private UserResponse updateExisting(User user, UserUpsertRequest request) {
+        user.updateProfile(request.name(), request.phone(), request.bio());
+        if (request.password() != null && !request.password().isBlank()) {
+            user.changePassword(passwordEncoderPort.encode(request.password()));
+        }
+        return UserMapper.toResponse(userRepository.save(user));
+    }
+
+    private UserResponse createFromUpsert(UserUpsertRequest request) {
+        if (request.password() == null || request.password().isBlank()) {
+            throw new IllegalArgumentException("password é obrigatório para criar um novo usuário");
+        }
+        String passwordHash = passwordEncoderPort.encode(request.password());
+        User saved = userRepository.save(UserMapper.toDomain(request, passwordHash));
         return UserMapper.toResponse(saved);
     }
 
