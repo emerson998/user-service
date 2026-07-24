@@ -150,3 +150,4 @@
 - `2026-07-24T13:50:20.152623+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T13:51:02.595478+00:00` **chaos** — incidente #80 — NullPointerException em /api/v1/users
 - `2026-07-24T13:51:15.392974+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos, como descrito no plano de implementação do `chaos-fix-a
+- `2026-07-24T13:51:24.782212+00:00` **chaos** — incidente #91 — UsuarioIndisponivelException em /api/v1/pix/transacoes
