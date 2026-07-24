@@ -225,3 +225,4 @@
 - `2026-07-24T18:05:18.100877+00:00` **chaos** — incidente #115 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T18:17:37.693377+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-24T18:18:05.989148+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:18:19.889351+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
