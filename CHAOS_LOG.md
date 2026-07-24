@@ -189,3 +189,4 @@
 - `2026-07-24T16:50:41.605111+00:00` **chaos** — incidente #2 — NullPointerException em /api/v1/users
 - `2026-07-24T16:51:04.284792+00:00` **fix** — incidente #2 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em vários inciden
 - `2026-07-24T16:51:49.220762+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço de usuarios está indisponível, o que impede a validação do titular de uma chave PIX antes de uma transação, como descrito no plano de implementação do usuarios-se
+- `2026-07-24T16:51:56.839341+00:00` **chaos** — incidente #17 — UsuarioIndisponivelException em /api/v1/pix/transacoes
