@@ -1,6 +1,6 @@
 # Task 28 — Notification Flag
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: baseline CRUD (`User`, `UserJpaEntity`).
 
@@ -33,7 +33,9 @@ o recebimento de notificações — base para a ativação em lote das tasks
 
 ## Critérios de aceite
 
-- [ ] Novo usuário criado (`POST`, `upsert`) nasce com
+- [x] Novo usuário criado (`POST`, `upsert`) nasce com
       `notificationsEnabled = false`.
-- [ ] `UserResponse` expõe `notificationsEnabled`.
-- [ ] Coberto por `UserTest` (`enableNotifications`/`disableNotifications`).
+- [x] `UserResponse` expõe `notificationsEnabled`.
+- [x] Coberto por `UserTest` (`enableNotifications`/`disableNotifications`).
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

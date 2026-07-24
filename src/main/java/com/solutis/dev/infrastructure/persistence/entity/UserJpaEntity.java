@@ -38,6 +38,9 @@ public class UserJpaEntity {
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
+    @Column(name = "notifications_enabled", nullable = false)
+    private boolean notificationsEnabled;
+
     @Version
     private Long version;
 
@@ -45,7 +48,7 @@ public class UserJpaEntity {
     }
 
     public UserJpaEntity(Long id, String name, String email, String cpf, String passwordHash, String phone,
-            String bio, boolean enabled, Instant deletedAt) {
+            String bio, boolean enabled, Instant deletedAt, boolean notificationsEnabled) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -55,6 +58,7 @@ public class UserJpaEntity {
         this.bio = bio;
         this.enabled = enabled;
         this.deletedAt = deletedAt;
+        this.notificationsEnabled = notificationsEnabled;
     }
 
     public Long getId() {
@@ -93,17 +97,22 @@ public class UserJpaEntity {
         return deletedAt;
     }
 
+    public boolean isNotificationsEnabled() {
+        return notificationsEnabled;
+    }
+
     public Long getVersion() {
         return version;
     }
 
     public void updateMutableFields(String name, String passwordHash, String phone, String bio, boolean enabled,
-            Instant deletedAt) {
+            Instant deletedAt, boolean notificationsEnabled) {
         this.name = name;
         this.passwordHash = passwordHash;
         this.phone = phone;
         this.bio = bio;
         this.enabled = enabled;
         this.deletedAt = deletedAt;
+        this.notificationsEnabled = notificationsEnabled;
     }
 }

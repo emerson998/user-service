@@ -43,7 +43,7 @@ class UserControllerTest {
     @Test
     void create_shouldReturn201_whenRequestIsValid() throws Exception {
         UserRequest request = new UserRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
-        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true);
+        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false);
         when(userUseCase.create(any(UserRequest.class))).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/users")
@@ -53,7 +53,8 @@ class UserControllerTest {
                 .andExpect(header().string("Location", "/api/v1/users/1"))
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Alice"))
-                .andExpect(jsonPath("$.cpf").value("12345678909"));
+                .andExpect(jsonPath("$.cpf").value("12345678909"))
+                .andExpect(jsonPath("$.notificationsEnabled").value(false));
     }
 
     @Test
@@ -104,7 +105,7 @@ class UserControllerTest {
     void upsert_shouldReturn200_whenRequestIsValid() throws Exception {
         UserUpsertRequest request = new UserUpsertRequest(
                 "Alice", "alice@example.com", "12345678909", "password123", null, null);
-        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true);
+        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false);
         when(userUseCase.upsert(any(UserUpsertRequest.class))).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/users/upsert")
@@ -181,7 +182,7 @@ class UserControllerTest {
 
     @Test
     void listAll_shouldReturn200WithUserList() throws Exception {
-        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true);
+        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false);
         when(userUseCase.listAll()).thenReturn(List.of(response));
 
         mockMvc.perform(get("/api/v1/users"))

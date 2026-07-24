@@ -13,9 +13,10 @@ public class User {
     private String bio;
     private boolean enabled;
     private Instant deletedAt;
+    private boolean notificationsEnabled;
 
     public User(Long id, String name, String email, String cpf, String passwordHash, String phone, String bio,
-            boolean enabled, Instant deletedAt) {
+            boolean enabled, Instant deletedAt, boolean notificationsEnabled) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -25,10 +26,11 @@ public class User {
         this.bio = bio;
         this.enabled = enabled;
         this.deletedAt = deletedAt;
+        this.notificationsEnabled = notificationsEnabled;
     }
 
     public static User createNew(String name, String email, String cpf, String passwordHash) {
-        return new User(null, name, email, cpf, passwordHash, null, null, true, null);
+        return new User(null, name, email, cpf, passwordHash, null, null, true, null, false);
     }
 
     public void updateProfile(String name, String phone, String bio) {
@@ -55,6 +57,14 @@ public class User {
 
     public boolean isDeleted() {
         return deletedAt != null;
+    }
+
+    public void enableNotifications() {
+        this.notificationsEnabled = true;
+    }
+
+    public void disableNotifications() {
+        this.notificationsEnabled = false;
     }
 
     public Long getId() {
@@ -91,5 +101,9 @@ public class User {
 
     public Instant getDeletedAt() {
         return deletedAt;
+    }
+
+    public boolean isNotificationsEnabled() {
+        return notificationsEnabled;
     }
 }

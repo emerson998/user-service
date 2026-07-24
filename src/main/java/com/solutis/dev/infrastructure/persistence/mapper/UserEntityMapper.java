@@ -11,18 +11,20 @@ public final class UserEntityMapper {
     public static UserJpaEntity toEntity(User user) {
         return new UserJpaEntity(
                 user.getId(), user.getName(), user.getEmail(), user.getCpf(), user.getPasswordHash(),
-                user.getPhone(), user.getBio(), user.isEnabled(), user.getDeletedAt());
+                user.getPhone(), user.getBio(), user.isEnabled(), user.getDeletedAt(),
+                user.isNotificationsEnabled());
     }
 
     public static User toDomain(UserJpaEntity entity) {
         return new User(
                 entity.getId(), entity.getName(), entity.getEmail(), entity.getCpf(), entity.getPasswordHash(),
-                entity.getPhone(), entity.getBio(), entity.isEnabled(), entity.getDeletedAt());
+                entity.getPhone(), entity.getBio(), entity.isEnabled(), entity.getDeletedAt(),
+                entity.isNotificationsEnabled());
     }
 
     public static void copyMutableFieldsTo(User user, UserJpaEntity managedEntity) {
         managedEntity.updateMutableFields(
                 user.getName(), user.getPasswordHash(), user.getPhone(), user.getBio(), user.isEnabled(),
-                user.getDeletedAt());
+                user.getDeletedAt(), user.isNotificationsEnabled());
     }
 }

@@ -25,9 +25,11 @@ import org.springframework.mock.web.MockMultipartFile;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import com.solutis.dev.application.dto.csv.CsvImportResult;
+import com.solutis.dev.application.dto.csv.CsvRowError;
 import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpsertRequest;
 import com.solutis.dev.application.port.in.UserUseCase;
+import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.InvalidFileException;
 import com.solutis.dev.domain.model.User;
 import com.solutis.dev.domain.repository.UserRepository;
@@ -53,7 +55,7 @@ class UserCsvServiceTest {
     @Test
     void exportToCsv_shouldWriteHeaderAndOneRowPerUser() throws IOException, CsvValidationException {
         User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed",
-                "+55 11 99999-0000", "bio", true, null);
+                "+55 11 99999-0000", "bio", true, null, false);
         when(userRepository.findAll()).thenReturn(List.of(user));
 
         byte[] csv = userCsvService.exportToCsv();
@@ -86,7 +88,7 @@ class UserCsvServiceTest {
     @Test
     void exportToCsv_shouldNeverIncludePasswordHash() {
         User user = new User(1L, "Alice", "alice@example.com", "12345678909", "super-secret-hash",
-                null, null, true, null);
+                null, null, true, null, false);
         when(userRepository.findAll()).thenReturn(List.of(user));
 
         String csv = new String(userCsvService.exportToCsv(), StandardCharsets.UTF_8);
@@ -102,8 +104,8 @@ class UserCsvServiceTest {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "users.csv", "text/csv", csv.getBytes(StandardCharsets.UTF_8));
         when(userUseCase.upsert(any(UserUpsertRequest.class)))
-                .thenReturn(new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true))
-                .thenReturn(new UserResponse(2L, "Bob", "bob@example.com", "98765432100", null, null, true));
+                .thenReturn(new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false))
+                .thenReturn(new UserResponse(2L, "Bob", "bob@example.com", "98765432100", null, null, true, false));
 
         CsvImportResult result = userCsvService.importFromCsv(file);
 
@@ -118,6 +120,35 @@ class UserCsvServiceTest {
                 "Alice", "alice@example.com", "12345678909", "password123", "+55 11 90000-0000", "bio-alice"));
         assertThat(requests.get(1).name()).isEqualTo("Bob");
         assertThat(requests.get(1).password()).isEmpty();
+    }
+
+    @Test
+    void importFromCsv_shouldSkipFailingRowsAndContinueProcessing_whenSomeRowsHaveDuplicateEmail() throws IOException {
+        StringBuilder csv = new StringBuilder("name,email,cpf,phone,bio,password\n");
+        for (int i = 1; i <= 10; i++) {
+            csv.append("User").append(i).append(",user").append(i).append("@example.com,")
+                    .append(String.format("%011d", i)).append(",,,password123\n");
+        }
+        MockMultipartFile file = new MockMultipartFile(
+                "file", "users.csv", "text/csv", csv.toString().getBytes(StandardCharsets.UTF_8));
+
+        when(userUseCase.upsert(any(UserUpsertRequest.class))).thenAnswer(invocation -> {
+            UserUpsertRequest request = invocation.getArgument(0);
+            if (request.email().equals("user3@example.com") || request.email().equals("user7@example.com")) {
+                throw new DuplicateResourceException("Usuário com e-mail " + request.email() + " já existe");
+            }
+            return new UserResponse(1L, request.name(), request.email(), request.cpf(), null, null, true, false);
+        });
+
+        CsvImportResult result = userCsvService.importFromCsv(file);
+
+        assertThat(result.successCount()).isEqualTo(8);
+        assertThat(result.errorCount()).isEqualTo(2);
+        assertThat(result.errors()).hasSize(2);
+        assertThat(result.errors()).extracting(CsvRowError::rowNumber).containsExactly(4, 8);
+        assertThat(result.errors()).allSatisfy(error -> assertThat(error.message()).contains("já existe"));
+
+        verify(userUseCase, times(10)).upsert(any(UserUpsertRequest.class));
     }
 
     @Test

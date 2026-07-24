@@ -1,6 +1,6 @@
 # Task 27 — Row-Level Error Handling
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 25, 26.
 
@@ -29,11 +29,20 @@ interromper o processamento das linhas restantes — complementa a task 26
   propagar a exceção).
 - `CsvImportResult.errorCount()` passa a refletir `errors.size()`.
 
+## Nota de implementação
+
+Todo o código de produção desta task (`CsvRowError`, `CsvImportResult`,
+`try/catch` por linha em `UserCsvService.importFromCsv`) já tinha sido
+implementado na task 25 (documentado lá na época). Esta task foi só o
+teste dedicado ao cenário exato dos critérios de aceite.
+
 ## Critérios de aceite
 
-- [ ] Um CSV com 10 linhas, onde 2 têm e-mail duplicado, processa as 8
+- [x] Um CSV com 10 linhas, onde 2 têm e-mail duplicado, processa as 8
       linhas válidas e devolve `errorCount = 2` com o número da linha e a
       mensagem de cada erro.
-- [ ] Nenhuma exceção de linha individual interrompe o processamento das
+- [x] Nenhuma exceção de linha individual interrompe o processamento das
       linhas seguintes.
-- [ ] Coberto por `UserCsvServiceTest` (arquivo misto válido/inválido).
+- [x] Coberto por `UserCsvServiceTest` (arquivo misto válido/inválido).
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

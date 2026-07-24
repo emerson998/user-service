@@ -19,6 +19,7 @@ class UserTest {
         assertThat(user.getBio()).isNull();
         assertThat(user.isEnabled()).isTrue();
         assertThat(user.isDeleted()).isFalse();
+        assertThat(user.isNotificationsEnabled()).isFalse();
     }
 
     @Test
@@ -43,13 +44,26 @@ class UserTest {
 
     @Test
     void activateAndDeactivate_shouldToggleEnabledFlag() {
-        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false, null);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false, null, false);
 
         user.activate();
         assertThat(user.isEnabled()).isTrue();
 
         user.deactivate();
         assertThat(user.isEnabled()).isFalse();
+    }
+
+    @Test
+    void enableAndDisableNotifications_shouldToggleNotificationsEnabledFlag() {
+        User user = User.createNew("Alice", "alice@example.com", "12345678909", "hashed-password");
+
+        assertThat(user.isNotificationsEnabled()).isFalse();
+
+        user.enableNotifications();
+        assertThat(user.isNotificationsEnabled()).isTrue();
+
+        user.disableNotifications();
+        assertThat(user.isNotificationsEnabled()).isFalse();
     }
 
     @Test

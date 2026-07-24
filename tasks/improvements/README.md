@@ -33,11 +33,11 @@ domínio `User` já existe.
 - [x] [24 — CSV Export Endpoint](24-csv-export-endpoint.md) — endpoint para exportar usuários para CSV.
 - [x] [25 — CSV Import Endpoint](25-csv-import-endpoint.md) — endpoint para importar usuários a partir de um CSV enviado.
 - [x] [26 — File Validation](26-csv-file-validation.md) — validar formato e tamanho do CSV no import, rejeitando arquivos inválidos antes de processar.
-- [ ] [27 — Row-Level Error Handling](27-csv-row-level-error-handling.md) — tratar e reportar erros por linha no import, sem interromper o restante do processamento.
+- [x] [27 — Row-Level Error Handling](27-csv-row-level-error-handling.md) — tratar e reportar erros por linha no import, sem interromper o restante do processamento.
 
 ### 3. Notification Flag & Bulk Actions
 
-- [ ] [28 — Notification Flag](28-notification-flag.md) — flag booleana na entidade de usuário para habilitar/desabilitar notificações.
+- [x] [28 — Notification Flag](28-notification-flag.md) — flag booleana na entidade de usuário para habilitar/desabilitar notificações.
 - [ ] [29 — Bulk Flag Activation Endpoint](29-bulk-flag-activation-endpoint.md) — endpoint para ativar a flag em lote, recebendo um array de ids no corpo.
 - [ ] [30 — Validation — Empty Array](30-bulk-validation-empty-array.md) — validar que o array de ids não vem vazio.
 - [ ] [31 — Validation — Duplicates & Existence](31-bulk-validation-duplicates-existence.md) — validar ausência de ids duplicados e existência de todos os usuários informados.
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 9/34 concluídas.
+Status geral: 11/34 concluídas.
 
 ## Ordem e dependências
 
