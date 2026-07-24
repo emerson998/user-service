@@ -1,6 +1,6 @@
 # Task 23 — Soft Delete
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: baseline CRUD (`User`, `UserJpaEntity`, `UserRepository`,
 `UserService.delete`).
@@ -42,11 +42,36 @@ passam a ignorar registros marcados como excluídos por padrão.
   confirmar com o usuário antes de codificar — impacta a regra de
   duplicidade da task 19/21).
 
+## Decisão confirmada
+
+Reuso de e-mail/CPF de usuário soft-deleted **permitido** — confirmado
+com o usuário em 2026-07-24. `findByEmail`/`findByCpf`/`existsById` (e
+`findById`/`findAll`) passam a usar variantes `*AndDeletedAtIsNull` no
+`UserJpaRepository`.
+
+## Mudança adicional não prevista — remoção de `deleteById`
+
+`UserRepository.deleteById` (port) e sua implementação em
+`UserRepositoryAdapter` foram **removidos**, não só alterados. Depois
+desta task, `UserService.delete` nunca mais chama um delete físico —
+manter `deleteById` no contrato do port seria um método morto que,
+pior, contradiz a regra de negócio recém-criada (nunca apagar a linha
+fisicamente por essa via). A busca "gerenciada" usada internamente por
+`UserRepositoryAdapter.save` (task 22, `loadManagedEntityWithCurrentVersion`)
+continua usando o `jpaRepository.findById` **bruto** (sem filtro), já
+que é um detalhe técnico de rastreio de versão do Hibernate, não uma
+regra de negócio de visibilidade.
+
 ## Critérios de aceite
 
-- [ ] `DELETE /api/v1/users/{id}` não remove a linha do banco — só seta
+- [x] `DELETE /api/v1/users/{id}` não remove a linha do banco — só seta
       `deleted_at`.
 - [ ] `GET /api/v1/users` e `GET /api/v1/users/{id}` não retornam usuário
-      soft-deleted (`404` no segundo caso).
-- [ ] Coberto por `UserServiceTest` (delete não chama `deleteById` de
-      fato) e teste de repositório/integração confirmando o filtro.
+      soft-deleted (`404` no segundo caso) — comportamento implementado
+      via `*AndDeletedAtIsNull`, mas não verificado por teste de
+      repositório/integração dedicado (só coberto indiretamente, via
+      mocks, nos testes de `UserServiceTest`).
+- [x] Coberto por `UserServiceTest` (delete agora persiste um `User` com
+      `isDeleted() == true`, não chama mais `deleteById` — método
+      removido do port). **Confirmado pelo usuário**: `mvn clean compile`
+      e `mvn test` rodados manualmente no IntelliJ.

@@ -1,6 +1,6 @@
 # Task 24 — CSV Export Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 18, 23.
 
@@ -36,7 +36,9 @@ task 23) para um arquivo CSV.
 
 ## Critérios de aceite
 
-- [ ] `GET /api/v1/users/csv/export` devolve um CSV com cabeçalho e uma
+- [x] `GET /api/v1/users/csv/export` devolve um CSV com cabeçalho e uma
       linha por usuário ativo.
-- [ ] Usuário soft-deleted (task 23) não aparece no export.
-- [ ] Nenhuma coluna de senha/hash no CSV.
+- [x] Usuário soft-deleted (task 23) não aparece no export (herdado do
+      filtro de `UserRepository.findAll()`, task 23).
+- [x] Nenhuma coluna de senha/hash no CSV. **Confirmado pelo usuário**:
+      `mvn clean compile` e `mvn test` rodados manualmente no IntelliJ.

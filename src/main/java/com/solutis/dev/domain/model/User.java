@@ -1,5 +1,7 @@
 package com.solutis.dev.domain.model;
 
+import java.time.Instant;
+
 public class User {
 
     private final Long id;
@@ -10,9 +12,10 @@ public class User {
     private String phone;
     private String bio;
     private boolean enabled;
+    private Instant deletedAt;
 
     public User(Long id, String name, String email, String cpf, String passwordHash, String phone, String bio,
-            boolean enabled) {
+            boolean enabled, Instant deletedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -21,10 +24,11 @@ public class User {
         this.phone = phone;
         this.bio = bio;
         this.enabled = enabled;
+        this.deletedAt = deletedAt;
     }
 
     public static User createNew(String name, String email, String cpf, String passwordHash) {
-        return new User(null, name, email, cpf, passwordHash, null, null, true);
+        return new User(null, name, email, cpf, passwordHash, null, null, true, null);
     }
 
     public void updateProfile(String name, String phone, String bio) {
@@ -43,6 +47,14 @@ public class User {
 
     public void deactivate() {
         this.enabled = false;
+    }
+
+    public void delete() {
+        this.deletedAt = Instant.now();
+    }
+
+    public boolean isDeleted() {
+        return deletedAt != null;
     }
 
     public Long getId() {
@@ -75,5 +87,9 @@ public class User {
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Instant getDeletedAt() {
+        return deletedAt;
     }
 }

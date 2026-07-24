@@ -1,6 +1,6 @@
 # Task 21 — Uniqueness Checks (email + CPF)
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 19, 20.
 
@@ -52,10 +52,10 @@ dependência no `pom.xml`).
 
 ## Critérios de aceite
 
-- [ ] `POST`/`PUT upsert` com CPF já cadastrado devolve `409`.
-- [ ] `POST`/`PUT upsert` com CPF em formato inválido devolve `400`
+- [x] `POST`/`PUT upsert` com CPF já cadastrado devolve `409`.
+- [x] `POST`/`PUT upsert` com CPF em formato inválido devolve `400`
       (mensagem do `@CPF`).
-- [ ] `UserResponse` expõe `cpf`.
-- [ ] Coberto por `UserServiceTest` (CPF duplicado) e `UserTest` (não deixa
-      criar `User` com `cpf` nulo/branco, se essa regra também for
-      reforçada no domínio).
+- [x] `UserResponse` expõe `cpf`.
+- [x] Coberto por `UserServiceTest` (CPF duplicado) e `UserTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

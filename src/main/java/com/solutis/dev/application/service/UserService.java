@@ -96,9 +96,9 @@ public class UserService implements UserUseCase {
 
     @Override
     public void delete(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Usuário", id);
-        }
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
+        user.delete();
+        userRepository.save(user);
     }
 }

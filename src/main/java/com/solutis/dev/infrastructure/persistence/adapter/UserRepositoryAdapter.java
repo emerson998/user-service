@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
+import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.model.User;
 import com.solutis.dev.domain.repository.UserRepository;
+import com.solutis.dev.infrastructure.persistence.entity.UserJpaEntity;
 import com.solutis.dev.infrastructure.persistence.mapper.UserEntityMapper;
 import com.solutis.dev.infrastructure.persistence.repository.UserJpaRepository;
 
@@ -21,36 +23,41 @@ public class UserRepositoryAdapter implements UserRepository {
 
     @Override
     public User save(User user) {
-        return UserEntityMapper.toDomain(jpaRepository.save(UserEntityMapper.toEntity(user)));
+        UserJpaEntity entity = user.getId() == null
+                ? UserEntityMapper.toEntity(user)
+                : loadManagedEntityWithCurrentVersion(user);
+        return UserEntityMapper.toDomain(jpaRepository.save(entity));
+    }
+
+    private UserJpaEntity loadManagedEntityWithCurrentVersion(User user) {
+        UserJpaEntity managedEntity = jpaRepository.findById(user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", user.getId()));
+        UserEntityMapper.copyMutableFieldsTo(user, managedEntity);
+        return managedEntity;
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return jpaRepository.findById(id).map(UserEntityMapper::toDomain);
+        return jpaRepository.findByIdAndDeletedAtIsNull(id).map(UserEntityMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return jpaRepository.findByEmail(email).map(UserEntityMapper::toDomain);
+        return jpaRepository.findByEmailAndDeletedAtIsNull(email).map(UserEntityMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByCpf(String cpf) {
-        return jpaRepository.findByCpf(cpf).map(UserEntityMapper::toDomain);
+        return jpaRepository.findByCpfAndDeletedAtIsNull(cpf).map(UserEntityMapper::toDomain);
     }
 
     @Override
     public List<User> findAll() {
-        return jpaRepository.findAll().stream().map(UserEntityMapper::toDomain).toList();
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        jpaRepository.deleteById(id);
+        return jpaRepository.findAllByDeletedAtIsNull().stream().map(UserEntityMapper::toDomain).toList();
     }
 
     @Override
     public boolean existsById(Long id) {
-        return jpaRepository.existsById(id);
+        return jpaRepository.existsByIdAndDeletedAtIsNull(id);
     }
 }

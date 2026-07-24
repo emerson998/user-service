@@ -18,6 +18,7 @@ class UserTest {
         assertThat(user.getPhone()).isNull();
         assertThat(user.getBio()).isNull();
         assertThat(user.isEnabled()).isTrue();
+        assertThat(user.isDeleted()).isFalse();
     }
 
     @Test
@@ -42,12 +43,22 @@ class UserTest {
 
     @Test
     void activateAndDeactivate_shouldToggleEnabledFlag() {
-        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false, null);
 
         user.activate();
         assertThat(user.isEnabled()).isTrue();
 
         user.deactivate();
         assertThat(user.isEnabled()).isFalse();
+    }
+
+    @Test
+    void delete_shouldSetDeletedAtAndMarkUserAsDeleted() {
+        User user = User.createNew("Alice", "alice@example.com", "12345678909", "hashed-password");
+
+        user.delete();
+
+        assertThat(user.isDeleted()).isTrue();
+        assertThat(user.getDeletedAt()).isNotNull();
     }
 }
