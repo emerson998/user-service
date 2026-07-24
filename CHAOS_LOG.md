@@ -152,3 +152,4 @@
 - `2026-07-24T13:51:15.392974+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos, como descrito no plano de implementação do `chaos-fix-a
 - `2026-07-24T13:51:24.782212+00:00` **chaos** — incidente #91 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T14:37:08.405107+00:00` **fix** — incidente #80 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em varios inciden
+- `2026-07-24T15:37:15.598151+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
