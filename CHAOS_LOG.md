@@ -186,3 +186,4 @@
 - `2026-07-24T16:49:09.166244+00:00` **chaos** — incidente #63 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T16:50:07.437326+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-24T16:50:34.319227+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:50:41.605111+00:00` **chaos** — incidente #2 — NullPointerException em /api/v1/users
