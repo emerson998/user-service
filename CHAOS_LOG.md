@@ -187,3 +187,4 @@
 - `2026-07-24T16:50:07.437326+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-24T16:50:34.319227+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T16:50:41.605111+00:00` **chaos** — incidente #2 — NullPointerException em /api/v1/users
+- `2026-07-24T16:51:04.284792+00:00` **fix** — incidente #2 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em vários inciden
