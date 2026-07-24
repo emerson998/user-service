@@ -140,3 +140,4 @@
 - `2026-07-23T23:57:01.711942+00:00` **chaos** — incidente #37 — NullPointerException em /api/v1/users/1
 - `2026-07-23T23:57:06.709608+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel e que o servico de usuarios esta indisponivel, o que impede a consulta de usuario necessaria para processar a transacao, isso pode ser devido a problemas de rede ou ao proprio se
 - `2026-07-24T00:00:40.078049+00:00` **chaos** — incidente #68 — MethodArgumentTypeMismatchException em /api/v1/users/dpcs
+- `2026-07-24T00:00:43.005546+00:00` **chaos** — incidente #69 — MethodArgumentTypeMismatchException em /api/v1/users/docs
