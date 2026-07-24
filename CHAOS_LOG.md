@@ -156,3 +156,4 @@
 - `2026-07-24T15:37:25.310426+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T15:37:57.619975+00:00` **chaos** — incidente #15 — NullPointerException em /api/v1/users
 - `2026-07-24T15:39:14.524712+00:00` **chaos** — incidente #35 — NullPointerException em /api/v1/users
+- `2026-07-24T15:40:15.528508+00:00` **chaos** — incidente #42 — NullPointerException em /api/v1/users
