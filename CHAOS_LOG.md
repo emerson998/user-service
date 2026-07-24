@@ -200,3 +200,4 @@
 - `2026-07-24T17:07:39.374194+00:00` **chaos** — incidente #74 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T17:07:43.246047+00:00` **fix** — incidente #74 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do `chao
 - `2026-07-24T17:08:36.191693+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:08:52.176454+00:00` **chaos** — incidente #209 — UsuarioIndisponivelException em /api/v1/pix/transacoes
