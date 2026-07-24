@@ -180,3 +180,4 @@
 - `2026-07-24T16:40:21.785344+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o servico de usuarios esta indisponivel, o que impede a validacao do titular de uma chave PIX antes de uma transacao, conforme descrito no plano de implementacao do usuario
 - `2026-07-24T16:47:59.223628+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-24T16:48:08.372251+00:00` **chaos** — incidente #5 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:48:35.633640+00:00` **chaos** — incidente #43 — NullPointerException em /api/v1/users
