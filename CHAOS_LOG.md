@@ -143,3 +143,4 @@
 - `2026-07-24T00:00:43.005546+00:00` **chaos** — incidente #69 — MethodArgumentTypeMismatchException em /api/v1/users/docs
 - `2026-07-24T00:01:20.922968+00:00` **chaos** — incidente #70 — NoResourceFoundException em /docs
 - `2026-07-24T00:01:21.630105+00:00` **chaos** — incidente #71 — NoResourceFoundException em /favicon.ico
+- `2026-07-24T12:39:24.214854+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
