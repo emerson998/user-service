@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import com.solutis.dev.domain.exception.DuplicateResourceException;
+import com.solutis.dev.domain.exception.InvalidFileException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 
 @RestControllerAdvice
@@ -41,6 +42,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(InvalidFileException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidFile(InvalidFileException ex, WebRequest request) {
+        return build(HttpStatus.valueOf(422), ex.getMessage(), request);
     }
 
     @ExceptionHandler(Exception.class)

@@ -1,6 +1,6 @@
 # Task 26 — File Validation
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 25.
 
@@ -39,11 +39,21 @@ nenhuma linha.
 - `application.properties`: `app.csv.max-file-size-bytes=5242880` (5MB,
   valor default sugerido — ajustar se o usuário definir outro limite).
 
+## Nota de implementação
+
+`UserCsvService` ganhou um terceiro parâmetro de construtor
+(`maxFileSizeBytes`, via `@Value`). Como o Mockito `@InjectMocks` não
+sabe resolver um `long` vindo de `@Value` (usaria `0` por padrão, o que
+quebraria todo teste de arquivo válido), `UserCsvServiceTest` trocou
+`@InjectMocks` por construção explícita em `@BeforeEach`.
+
 ## Critérios de aceite
 
-- [ ] Arquivo vazio, extensão inválida, acima do tamanho máximo, ou com
+- [x] Arquivo vazio, extensão inválida, acima do tamanho máximo, ou com
       cabeçalho incorreto → `422`, nenhuma linha é processada.
-- [ ] Arquivo válido segue o fluxo normal da task 25.
-- [ ] Coberto por `UserCsvServiceTest` (um caso por validação) e
-      `GlobalExceptionHandlerTest`/`UserCsvControllerTest` para o mapeamento
-      HTTP.
+- [x] Arquivo válido segue o fluxo normal da task 25.
+- [x] Coberto por `UserCsvServiceTest` (um caso por validação) e
+      `UserCsvControllerTest` para o mapeamento HTTP (não há
+      `GlobalExceptionHandlerTest` dedicado ainda — mapeamento verificado
+      via o controller). **Confirmado pelo usuário**: `mvn clean compile`
+      e `mvn test` rodados manualmente no IntelliJ.

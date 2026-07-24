@@ -5,9 +5,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.solutis.dev.application.dto.csv.CsvImportResult;
 import com.solutis.dev.application.port.in.UserCsvUseCase;
 import com.solutis.dev.web.ApiRoutes;
 
@@ -36,5 +40,11 @@ public class UserCsvController {
                 .contentType(MediaType.parseMediaType("text/csv"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString())
                 .body(csv);
+    }
+
+    @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Importa usuários a partir de um CSV")
+    public ResponseEntity<CsvImportResult> importCsv(@RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok(userCsvUseCase.importFromCsv(file));
     }
 }

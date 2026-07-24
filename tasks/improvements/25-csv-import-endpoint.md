@@ -1,6 +1,6 @@
 # Task 25 — CSV Import Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 19, 20, 21, 24.
 
@@ -41,11 +41,24 @@ chamada a `UserUseCase.upsert(...)`.
   `CsvImportResult` no corpo (mesmo se houver erros parciais — só a task
   26 rejeita o arquivo inteiro antes de processar).
 
+## Nota de implementação
+
+O acúmulo de erro por linha (item 3 da especificação) já foi implementado
+nesta task com um `try/catch` por linha em `UserCsvService.importFromCsv`
+(erro vira um `CsvRowError`, processamento continua) — a task 27 herda
+isso já funcionando e foca em teste dedicado/refinamento, não em
+implementar do zero. Erros estruturais do arquivo (CSV ilegível) ainda
+propagam como `RuntimeException` genérica — task 26 troca isso por
+`InvalidFileException` → `422`.
+
 ## Critérios de aceite
 
-- [ ] `POST /api/v1/users/csv/import` com um CSV válido cria/atualiza os
+- [x] `POST /api/v1/users/csv/import` com um CSV válido cria/atualiza os
       usuários correspondentes (mesma semântica do upsert).
-- [ ] Resposta inclui `successCount` condizente com o número de linhas
+- [x] Resposta inclui `successCount` condizente com o número de linhas
       processadas com sucesso.
-- [ ] Coberto por teste em `UserCsvServiceTest` (linhas de create e de
-      update misturadas no mesmo arquivo).
+- [x] Coberto por teste em `UserCsvServiceTest` (linhas de create e de
+      update misturadas no mesmo arquivo — testado via mock de
+      `UserUseCase.upsert`, com `ArgumentCaptor` confirmando a ordem dos
+      campos parseados por linha). **Confirmado pelo usuário**:
+      `mvn clean compile` e `mvn test` rodados manualmente no IntelliJ.

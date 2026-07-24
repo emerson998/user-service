@@ -31,8 +31,8 @@ domínio `User` já existe.
 ### 2. CSV Import & Export
 
 - [x] [24 — CSV Export Endpoint](24-csv-export-endpoint.md) — endpoint para exportar usuários para CSV.
-- [ ] [25 — CSV Import Endpoint](25-csv-import-endpoint.md) — endpoint para importar usuários a partir de um CSV enviado.
-- [ ] [26 — File Validation](26-csv-file-validation.md) — validar formato e tamanho do CSV no import, rejeitando arquivos inválidos antes de processar.
+- [x] [25 — CSV Import Endpoint](25-csv-import-endpoint.md) — endpoint para importar usuários a partir de um CSV enviado.
+- [x] [26 — File Validation](26-csv-file-validation.md) — validar formato e tamanho do CSV no import, rejeitando arquivos inválidos antes de processar.
 - [ ] [27 — Row-Level Error Handling](27-csv-row-level-error-handling.md) — tratar e reportar erros por linha no import, sem interromper o restante do processamento.
 
 ### 3. Notification Flag & Bulk Actions
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 7/34 concluídas.
+Status geral: 9/34 concluídas.
 
 ## Ordem e dependências
 
