@@ -220,3 +220,4 @@
 - `2026-07-24T17:58:19.530392+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
 - `2026-07-24T17:59:08.158442+00:00` **chaos** — incidente #23 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T18:01:06.397198+00:00` **chaos** — incidente #28 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:03:58.267446+00:00` **chaos** — incidente #46 — UsuarioIndisponivelException em /api/v1/pix/transacoes
