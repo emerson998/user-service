@@ -244,3 +244,4 @@
 - `2026-07-24T19:18:04.611291+00:00` **rollback** — rollback do incidente #33 — reintroduz o estado anterior ao fix (revert de 254434c)
 - `2026-07-24T19:19:25.432475+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T19:20:56.298238+00:00` **rollback** — rollback do incidente #1 — reintroduz o estado anterior ao fix (revert de fd2752d)
+- `2026-07-24T19:21:46.659293+00:00` **chaos** — incidente #2 — UsuarioIndisponivelException em /api/v1/pix/transacoes
