@@ -16,16 +16,17 @@ public final class UserMapper {
 
     public static UserResponse toResponse(User user) {
         // CHAOS:TOGGLE:BEGIN
-        // CHAOS:FIX — nome pode vir nulo se o dado foi inserido contornando a
-        // validação de @NotBlank; nesse caso devolvemos string vazia em vez de
-        // quebrar com NullPointerException.
+        // CHAOS:BUG — assume que name nunca é nulo; essa garantia sempre veio da
+        // validação de @NotBlank em UserRequest. O chaos insere um User direto pelo
+        // repositório, contornando essa validação, e expõe esta falta de defesa.
         return new UserResponse(
                 user.getId(),
-                user.getName() == null ? "" : user.getName().trim(),
+                user.getName().trim(),
                 user.getEmail(),
                 user.getPhone(),
                 user.getBio(),
-                user.isEnabled());
+                user.isEnabled(),
+                user.getSaldo());
         // CHAOS:TOGGLE:END
     }
 }
