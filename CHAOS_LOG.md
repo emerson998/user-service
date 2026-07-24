@@ -142,3 +142,4 @@
 - `2026-07-24T00:00:40.078049+00:00` **chaos** — incidente #68 — MethodArgumentTypeMismatchException em /api/v1/users/dpcs
 - `2026-07-24T00:00:43.005546+00:00` **chaos** — incidente #69 — MethodArgumentTypeMismatchException em /api/v1/users/docs
 - `2026-07-24T00:01:20.922968+00:00` **chaos** — incidente #70 — NoResourceFoundException em /docs
+- `2026-07-24T00:01:21.630105+00:00` **chaos** — incidente #71 — NoResourceFoundException em /favicon.ico
