@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service.name":"usuarios-service"}</customFields>
+            <includeMdcKeyName>correlationId</includeMdcKeyName>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <message>message</message>
+                <logger>logger</logger>
+                <thread>thread</thread>
+                <level>level</level>
+                <version>[ignore]</version>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <!-- Arquivo JSON-lines, mesmo schema universal usado por pix-service e
+         chaos-fix-agent. E o que o log-hub le (tail) para expor/agregar/
+         encaminhar a um APM, sem acoplar o app a uma stack especifica. -->
+    <appender name="JSON_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/usuarios-service.json.log</file>
+        <append>true</append>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service.name":"usuarios-service"}</customFields>
+            <includeMdcKeyName>correlationId</includeMdcKeyName>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <message>message</message>
+                <logger>logger</logger>
+                <thread>thread</thread>
+                <level>level</level>
+                <version>[ignore]</version>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="JSON_CONSOLE"/>
+        <appender-ref ref="JSON_FILE"/>
+    </root>
+</configuration>

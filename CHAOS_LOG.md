@@ -1,0 +1,248 @@
+# Chaos Log (demo)
+
+- `2026-07-23T16:54:56.210023+00:00` **chaos** — incidente #1 — NoResourceFoundException em /favicon.ico
+- `2026-07-23T16:55:03.812632+00:00` **chaos** — incidente #2 — NoResourceFoundException em /
+- `2026-07-23T16:55:37.949564+00:00` **fix** — incidente #2 resolvido — diagnostico: A causa raiz provavel é que o servidor não conseguiu encontrar um recurso estático para atender à requisição para o caminho raiz, o que pode ser devido à falta de um arquivo index.html ou uma configur
+- `2026-07-23T16:55:59.655966+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel é que o arquivo favicon.ico não foi encontrado no caminho especificado, o que indica um problema de configuração de recursos estáticos no servidor.
+- `2026-07-23T17:02:15.180299+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:02:46.789517+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel e que o objeto User esta sendo criado ou atualizado com o nome nulo, o que esta causando um NullPointerException quando o metodo trim() e chamado, isso pode estar ocorrendo devid
+- `2026-07-23T17:05:57.336351+00:00` **chaos** — incidente #38 — NullPointerException em /api/v1/users
+- `2026-07-23T17:06:58.689451+00:00` **chaos** — incidente #78 — NullPointerException em /api/v1/users
+- `2026-07-23T17:07:58.713007+00:00` **chaos** — incidente #109 — NullPointerException em /api/v1/users
+- `2026-07-23T17:08:08.614177+00:00` **fix** — incidente #109 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele. Isso pode estar ocorrendo devido 
+- `2026-07-23T17:08:50.310950+00:00` **fix** — incidente #78 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando a exceção NullPointerException quando se tenta chamar o método trim() nele. Isso pode estar ocorrendo 
+- `2026-07-23T17:10:51.952314+00:00` **fix** — incidente #38 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando o método trim() é chamado. Isso pode ocorrer se o usuário não tiver for
+- `2026-07-23T17:21:40.692642+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:21:47.375825+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo nome como null, o que está causando uma NullPointerException quando se tenta chamar o método trim() nele, isso pode estar acontecendo devi
+- `2026-07-23T17:28:40.744868+00:00` **test-toggle** — valida commit real incluindo UserMapper.java (extra_paths)
+- `2026-07-23T17:31:00.677133+00:00` **chaos** — incidente #8 — NullPointerException em /api/v1/users
+- `2026-07-23T17:31:04.857210+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:31:09.639965+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando a exceção NullPointerException quando se tenta chamar o método trim() nesse atributo.
+- `2026-07-23T17:32:35.326485+00:00` **chaos** — incidente #8 — NullPointerException em /api/v1/users
+- `2026-07-23T17:32:43.585370+00:00` **fix** — incidente #8 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nesse atributo, isso pode estar relacio
+- `2026-07-23T17:32:49.686623+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:32:50.474894+00:00` **chaos** — incidente #2 — ObjectOptimisticLockingFailureException em /internal/chaos/users-flow/mitigate
+- `2026-07-23T17:36:19.076545+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T17:38:16.769969+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:38:49.393699+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel e que o objeto User esta sendo retornado com o atributo name como null, o que esta causando um NullPointerException quando se tenta chamar o metodo trim() nesse atributo.
+- `2026-07-23T17:42:49.216303+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T17:43:29.046095+00:00` **chaos** — incidente #28 — NullPointerException em /api/v1/users
+- `2026-07-23T17:43:37.397616+00:00` **fix** — incidente #28 resolvido — diagnostico: a causa raiz provavel e que o objeto User possui um atributo nome nulo, o que esta causando a excecao NullPointerException quando se tenta chamar o metodo trim() nele, isso pode ocorrer devido a uma f
+- `2026-07-23T17:46:07.056908+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T17:46:29.036117+00:00` **chaos** — incidente #35 — NullPointerException em /api/v1/users
+- `2026-07-23T17:47:31.000905+00:00` **chaos** — incidente #66 — NullPointerException em /api/v1/users
+- `2026-07-23T17:48:02.467468+00:00` **fix** — incidente #66 resolvido — diagnostico: A causa raiz provavel e que o objeto User possui um atributo name nulo, o que esta causando a excecao NullPointerException ao tentar chamar o metodo trim() nesse atributo.
+- `2026-07-23T17:48:06.426581+00:00` **fix** — incidente #35 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, isso pode estar ocorrendo devido 
+- `2026-07-23T17:48:42.147394+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T17:49:03.132434+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T17:49:13.537987+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel e que o objeto User possui um atributo nome nulo, o que esta causando um NullPointerException quando se tenta chamar o metodo trim() nele, isso pode estar ocorrendo devido a uma 
+- `2026-07-23T18:04:27.509859+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T18:06:27.054582+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T18:07:03.284799+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel e que o objeto User possui um atributo nome nulo, o que esta causando um NullPointerException ao tentar chamar o metodo trim() nele, isso pode estar relacionado a uma falha na va
+- `2026-07-23T18:09:11.315826+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T18:09:52.579123+00:00` **chaos** — incidente #25 — NullPointerException em /api/v1/users
+- `2026-07-23T18:10:03.997027+00:00` **fix** — incidente #25 resolvido — diagnostico: A causa raiz provavel e que o objeto User esta sendo retornado com o atributo name como null, o que esta causando um NullPointerException quando se tenta chamar o metodo trim() nesse atributo.
+- `2026-07-23T19:25:50.955767+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T19:27:39.016140+00:00` **chaos** — incidente #35 — NullPointerException em /api/v1/users
+- `2026-07-23T19:28:40.925987+00:00` **chaos** — incidente #67 — NullPointerException em /api/v1/users
+- `2026-07-23T19:29:40.917720+00:00` **chaos** — incidente #98 — NullPointerException em /api/v1/users
+- `2026-07-23T19:30:42.916510+00:00` **chaos** — incidente #130 — NullPointerException em /api/v1/users
+- `2026-07-23T19:30:50.065664+00:00` **fix** — incidente #130 resolvido — diagnostico: A causa raiz provavel e que o objeto User possui um atributo nome nulo, o que esta causando uma NullPointerException ao tentar chamar o metodo trim() nele, isso pode estar relacionado a uma falha na v
+- `2026-07-23T20:33:38.866068+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:35:44.308091+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:38:51.058970+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:39:19.020016+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T20:39:25.560197+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, isso pode estar ocorrendo devido 
+- `2026-07-23T20:45:36.470797+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:46:27.062827+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T20:46:33.548214+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando uma NullPointerException quando se tenta chamar o método trim() nele. Isso pode estar ocorrendo devido
+- `2026-07-23T20:50:43.451868+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:52:11.429167+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T20:52:34.048608+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando a exceção NullPointerException quando se tenta chamar o método trim() nesse atributo.
+- `2026-07-23T20:56:27.062778+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T20:56:53.516071+00:00` **chaos** — incidente #15 — NullPointerException em /api/v1/users
+- `2026-07-23T20:58:18.353513+00:00` **chaos** — incidente #42 — NullPointerException em /api/v1/users
+- `2026-07-23T21:00:00.372920+00:00` **chaos** — incidente #44 — NullPointerException em /api/v1/users
+- `2026-07-23T21:01:18.360415+00:00` **chaos** — incidente #51 — NullPointerException em /api/v1/users
+- `2026-07-23T21:03:18.372369+00:00` **chaos** — incidente #53 — NullPointerException em /api/v1/users
+- `2026-07-23T21:04:18.436971+00:00` **chaos** — incidente #54 — NullPointerException em /api/v1/users
+- `2026-07-23T21:06:18.358107+00:00` **chaos** — incidente #56 — NullPointerException em /api/v1/users
+- `2026-07-23T21:07:18.358833+00:00` **chaos** — incidente #57 — NullPointerException em /api/v1/users
+- `2026-07-23T21:08:18.356424+00:00` **chaos** — incidente #58 — NullPointerException em /api/v1/users
+- `2026-07-23T21:09:18.360676+00:00` **chaos** — incidente #59 — NullPointerException em /api/v1/users
+- `2026-07-23T21:11:18.350750+00:00` **chaos** — incidente #61 — NullPointerException em /api/v1/users
+- `2026-07-23T21:12:18.381337+00:00` **chaos** — incidente #62 — NullPointerException em /api/v1/users
+- `2026-07-23T21:13:18.382224+00:00` **chaos** — incidente #63 — NullPointerException em /api/v1/users
+- `2026-07-23T21:15:18.343357+00:00` **chaos** — incidente #65 — NullPointerException em /api/v1/users
+- `2026-07-23T21:16:18.444072+00:00` **chaos** — incidente #66 — NullPointerException em /api/v1/users
+- `2026-07-23T21:17:19.500127+00:00` **chaos** — incidente #67 — NullPointerException em /api/v1/users
+- `2026-07-23T21:18:24.024845+00:00` **chaos** — incidente #69 — NullPointerException em /api/v1/users
+- `2026-07-23T21:18:27.384292+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T21:18:28.382797+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T21:20:18.633564+00:00` **chaos** — incidente #4 — NullPointerException em /api/v1/users
+- `2026-07-23T21:22:18.372294+00:00` **chaos** — incidente #6 — NullPointerException em /api/v1/users
+- `2026-07-23T21:24:18.792698+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T21:26:18.396714+00:00` **chaos** — incidente #3 — NullPointerException em /api/v1/users
+- `2026-07-23T21:28:18.350502+00:00` **chaos** — incidente #5 — NullPointerException em /api/v1/users
+- `2026-07-23T21:29:18.415008+00:00` **chaos** — incidente #6 — NullPointerException em /api/v1/users
+- `2026-07-23T21:32:18.673034+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T21:33:18.431566+00:00` **chaos** — incidente #2 — NullPointerException em /api/v1/users
+- `2026-07-23T21:35:18.353957+00:00` **chaos** — incidente #4 — NullPointerException em /api/v1/users
+- `2026-07-23T21:36:18.417104+00:00` **chaos** — incidente #5 — NullPointerException em /api/v1/users
+- `2026-07-23T21:37:18.479079+00:00` **chaos** — incidente #6 — NullPointerException em /api/v1/users
+- `2026-07-23T21:39:18.371278+00:00` **chaos** — incidente #8 — NullPointerException em /api/v1/users
+- `2026-07-23T21:40:18.389546+00:00` **chaos** — incidente #9 — NullPointerException em /api/v1/users
+- `2026-07-23T21:42:18.381242+00:00` **chaos** — incidente #11 — NullPointerException em /api/v1/users
+- `2026-07-23T21:45:18.898128+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T21:47:18.370420+00:00` **chaos** — incidente #3 — NullPointerException em /api/v1/users
+- `2026-07-23T21:48:18.404951+00:00` **chaos** — incidente #4 — NullPointerException em /api/v1/users
+- `2026-07-23T21:49:23.872052+00:00` **chaos** — incidente #6 — NullPointerException em /api/v1/users
+- `2026-07-23T21:49:34.877290+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T21:49:44.320376+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T21:51:39.066784+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T21:51:44.541638+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel e que o objeto User esta sendo criado ou atualizado com o nome nulo, o que esta causando um NullPointerException quando o metodo trim() e chamado, isso pode estar ocorrendo devid
+- `2026-07-23T22:15:57.627522+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T22:17:18.833288+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T22:19:18.476086+00:00` **chaos** — incidente #3 — NullPointerException em /api/v1/users
+- `2026-07-23T22:21:59.191054+00:00` **rollback** — rollback do incidente #1 — reintroduz o estado anterior ao fix (revert de a059f83)
+- `2026-07-23T22:27:59.866929+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T22:28:33.818901+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T22:29:28.974049+00:00` **rollback** — rollback do incidente #1 — reintroduz o estado anterior ao fix (revert de 066b340)
+- `2026-07-23T23:13:20.668718+00:00` **chaos** — incidente #18 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-23T23:22:13.430818+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T23:22:59.481194+00:00` **chaos** — incidente #19 — NullPointerException em /api/v1/users
+- `2026-07-23T23:24:18.368748+00:00` **chaos** — incidente #39 — NullPointerException em /api/v1/users
+- `2026-07-23T23:25:18.380259+00:00` **chaos** — incidente #40 — NullPointerException em /api/v1/users
+- `2026-07-23T23:26:18.376053+00:00` **chaos** — incidente #41 — NullPointerException em /api/v1/users
+- `2026-07-23T23:27:18.374723+00:00` **chaos** — incidente #42 — NullPointerException em /api/v1/users
+- `2026-07-23T23:28:18.387549+00:00` **chaos** — incidente #43 — NullPointerException em /api/v1/users
+- `2026-07-23T23:30:18.347859+00:00` **chaos** — incidente #51 — NullPointerException em /api/v1/users
+- `2026-07-23T23:31:18.401460+00:00` **chaos** — incidente #52 — NullPointerException em /api/v1/users
+- `2026-07-23T23:32:18.452309+00:00` **chaos** — incidente #53 — NullPointerException em /api/v1/users
+- `2026-07-23T23:34:18.355816+00:00` **chaos** — incidente #55 — NullPointerException em /api/v1/users
+- `2026-07-23T23:36:18.351715+00:00` **chaos** — incidente #57 — NullPointerException em /api/v1/users
+- `2026-07-23T23:37:18.337757+00:00` **chaos** — incidente #58 — NullPointerException em /api/v1/users
+- `2026-07-23T23:38:18.352315+00:00` **chaos** — incidente #59 — NullPointerException em /api/v1/users
+- `2026-07-23T23:39:18.348075+00:00` **chaos** — incidente #60 — NullPointerException em /api/v1/users
+- `2026-07-23T23:40:18.341056+00:00` **chaos** — incidente #61 — NullPointerException em /api/v1/users
+- `2026-07-23T23:41:18.347884+00:00` **chaos** — incidente #62 — NullPointerException em /api/v1/users
+- `2026-07-23T23:42:18.407765+00:00` **chaos** — incidente #63 — NullPointerException em /api/v1/users
+- `2026-07-23T23:43:34.865180+00:00` **chaos** — incidente #65 — NullPointerException em /api/v1/users
+- `2026-07-23T23:44:36.581088+00:00` **chaos** — incidente #77 — NullPointerException em /api/v1/users
+- `2026-07-23T23:44:54.290199+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T23:45:27.461442+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T23:47:18.921437+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-23T23:49:18.376806+00:00` **chaos** — incidente #3 — NullPointerException em /api/v1/users
+- `2026-07-23T23:49:46.282225+00:00` **fix** — incidente #3 resolvido — diagnostico: A causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, isso pode estar acontecendo devid
+- `2026-07-23T23:56:35.238550+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-23T23:56:42.680541+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-23T23:56:55.109358+00:00` **chaos** — incidente #33 — NullPointerException em /api/v1/users
+- `2026-07-23T23:57:01.711942+00:00` **chaos** — incidente #37 — NullPointerException em /api/v1/users/1
+- `2026-07-23T23:57:06.709608+00:00` **fix** — incidente #1 resolvido — diagnostico: A causa raiz provavel e que o servico de usuarios esta indisponivel, o que impede a consulta de usuario necessaria para processar a transacao, isso pode ser devido a problemas de rede ou ao proprio se
+- `2026-07-24T00:00:40.078049+00:00` **chaos** — incidente #68 — MethodArgumentTypeMismatchException em /api/v1/users/dpcs
+- `2026-07-24T00:00:43.005546+00:00` **chaos** — incidente #69 — MethodArgumentTypeMismatchException em /api/v1/users/docs
+- `2026-07-24T00:01:20.922968+00:00` **chaos** — incidente #70 — NoResourceFoundException em /docs
+- `2026-07-24T00:01:21.630105+00:00` **chaos** — incidente #71 — NoResourceFoundException em /favicon.ico
+- `2026-07-24T12:39:24.214854+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T12:41:14.720064+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-24T12:43:26.166761+00:00` **rollback** — rollback do incidente #1 — reintroduz o estado anterior ao fix (revert de 9670556)
+- `2026-07-24T13:49:06.402019+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T13:50:20.152623+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T13:51:02.595478+00:00` **chaos** — incidente #80 — NullPointerException em /api/v1/users
+- `2026-07-24T13:51:15.392974+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos, como descrito no plano de implementação do `chaos-fix-a
+- `2026-07-24T13:51:24.782212+00:00` **chaos** — incidente #91 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T14:37:08.405107+00:00` **fix** — incidente #80 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em varios inciden
+- `2026-07-24T15:37:15.598151+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T15:37:25.310426+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T15:37:57.619975+00:00` **chaos** — incidente #15 — NullPointerException em /api/v1/users
+- `2026-07-24T15:39:14.524712+00:00` **chaos** — incidente #35 — NullPointerException em /api/v1/users
+- `2026-07-24T15:40:15.528508+00:00` **chaos** — incidente #42 — NullPointerException em /api/v1/users
+- `2026-07-24T15:42:14.503137+00:00` **chaos** — incidente #68 — NullPointerException em /api/v1/users
+- `2026-07-24T15:43:14.494890+00:00` **chaos** — incidente #69 — NullPointerException em /api/v1/users
+- `2026-07-24T15:44:14.525033+00:00` **chaos** — incidente #70 — NullPointerException em /api/v1/users
+- `2026-07-24T15:45:14.525166+00:00` **chaos** — incidente #71 — NullPointerException em /api/v1/users
+- `2026-07-24T15:46:14.588803+00:00` **chaos** — incidente #72 — NullPointerException em /api/v1/users
+- `2026-07-24T15:48:14.523510+00:00` **chaos** — incidente #74 — NullPointerException em /api/v1/users
+- `2026-07-24T15:49:14.524101+00:00` **chaos** — incidente #75 — NullPointerException em /api/v1/users
+- `2026-07-24T15:50:14.532323+00:00` **chaos** — incidente #76 — NullPointerException em /api/v1/users
+- `2026-07-24T15:51:14.598874+00:00` **chaos** — incidente #77 — NullPointerException em /api/v1/users
+- `2026-07-24T15:53:14.507467+00:00` **chaos** — incidente #79 — NullPointerException em /api/v1/users
+- `2026-07-24T15:54:14.584273+00:00` **chaos** — incidente #80 — NullPointerException em /api/v1/users
+- `2026-07-24T15:55:35.587232+00:00` **chaos** — incidente #82 — NullPointerException em /api/v1/users
+- `2026-07-24T15:57:14.522565+00:00` **chaos** — incidente #98 — NullPointerException em /api/v1/users
+- `2026-07-24T15:58:14.561721+00:00` **chaos** — incidente #99 — NullPointerException em /api/v1/users
+- `2026-07-24T15:59:14.564103+00:00` **chaos** — incidente #100 — NullPointerException em /api/v1/users
+- `2026-07-24T16:21:51.081339+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T16:22:02.849460+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:23:02.897768+00:00` **chaos** — incidente #12 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:37:51.916884+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T16:38:36.245842+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:40:21.785344+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o servico de usuarios esta indisponivel, o que impede a validacao do titular de uma chave PIX antes de uma transacao, conforme descrito no plano de implementacao do usuario
+- `2026-07-24T16:47:59.223628+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T16:48:08.372251+00:00` **chaos** — incidente #5 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:48:35.633640+00:00` **chaos** — incidente #43 — NullPointerException em /api/v1/users
+- `2026-07-24T16:48:47.361322+00:00` **fix** — incidente #43 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em varios inciden
+- `2026-07-24T16:48:51.676275+00:00` **fix** — incidente #5 resolvido — diagnostico: a causa raiz provavel é que o servico de usuarios esta indisponivel, o que impede a validacao do titular do PIX, conforme descrito no plano de implementacao do usuarios-service (fonte: usuarios-servic
+- `2026-07-24T16:49:09.166244+00:00` **chaos** — incidente #63 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:50:07.437326+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T16:50:34.319227+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:50:41.605111+00:00` **chaos** — incidente #2 — NullPointerException em /api/v1/users
+- `2026-07-24T16:51:04.284792+00:00` **fix** — incidente #2 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em vários inciden
+- `2026-07-24T16:51:49.220762+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço de usuarios está indisponível, o que impede a validação do titular de uma chave PIX antes de uma transação, como descrito no plano de implementação do usuarios-se
+- `2026-07-24T16:51:56.839341+00:00` **chaos** — incidente #17 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:54:10.850289+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T16:54:28.822134+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T16:54:47.715124+00:00` **chaos** — incidente #2 — NullPointerException em /api/v1/users
+- `2026-07-24T16:55:27.050331+00:00` **fix** — incidente #2 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em varios inciden
+- `2026-07-24T16:55:28.045207+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do `chao
+- `2026-07-24T17:05:57.306246+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:07:13.719451+00:00` **rollback** — rollback do incidente #1 — reintroduz o estado anterior ao fix (revert de f25426a)
+- `2026-07-24T17:07:39.374194+00:00` **chaos** — incidente #74 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:07:43.246047+00:00` **fix** — incidente #74 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do `chao
+- `2026-07-24T17:08:36.191693+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:08:52.176454+00:00` **chaos** — incidente #209 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:08:56.330972+00:00` **fix** — incidente #209 resolvido — diagnostico: a causa raiz provavel é que o serviço `usuarios-service` está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do `chao
+- `2026-07-24T17:10:53.979534+00:00` **chaos** — incidente #318 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:11:45.451119+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:12:03.594912+00:00` **chaos** — incidente #1 — NullPointerException em /api/v1/users
+- `2026-07-24T17:12:06.908169+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o objeto User está com o atributo name como null, o que está causando um NullPointerException quando se tenta chamar o método trim() nele, como mencionado em vários inciden
+- `2026-07-24T17:23:00.097784+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:23:08.239524+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:23:18.345218+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T17:25:06.510103+00:00` **chaos** — incidente #75 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:30:00.606038+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:30:16.852096+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:30:30.552835+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T17:31:17.822470+00:00` **chaos** — incidente #5 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:49:50.173626+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:57:49.545686+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T17:58:04.392232+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T17:58:19.530392+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T17:59:08.158442+00:00` **chaos** — incidente #23 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:01:06.397198+00:00` **chaos** — incidente #28 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:03:58.267446+00:00` **chaos** — incidente #46 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:04:12.052037+00:00` **fix** — incidente #46 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T18:05:18.100877+00:00` **chaos** — incidente #115 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:17:37.693377+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T18:18:05.989148+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:18:19.889351+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T18:22:50.843172+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T18:23:06.280382+00:00` **chaos** — incidente #26 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:23:20.064688+00:00` **fix** — incidente #26 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T18:24:22.151119+00:00` **chaos** — incidente #31 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:25:08.208833+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:25:21.882761+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T18:32:06.274928+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T18:32:43.358696+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:32:57.068362+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T18:33:46.541989+00:00` **chaos** — incidente #6 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:36:53.278962+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T18:37:14.197290+00:00` **chaos** — incidente #15 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T18:37:27.851171+00:00` **fix** — incidente #15 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
+- `2026-07-24T18:42:31.089240+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
+- `2026-07-24T18:42:57.829235+00:00` **chaos** — incidente #33 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T19:18:04.611291+00:00` **rollback** — rollback do incidente #33 — reintroduz o estado anterior ao fix (revert de 254434c)
+- `2026-07-24T19:19:25.432475+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T19:20:56.298238+00:00` **rollback** — rollback do incidente #1 — reintroduz o estado anterior ao fix (revert de fd2752d)
+- `2026-07-24T19:21:46.659293+00:00` **chaos** — incidente #2 — UsuarioIndisponivelException em /api/v1/pix/transacoes
+- `2026-07-24T19:22:00.656436+00:00` **fix** — incidente #2 resolvido — diagnostico: a causa raiz provavel é que o serviço usuarios-service está indisponível, o que impede a consulta de usuário e bloqueia o fluxo de pagamentos do PIX, como descrito no plano de implementação do chaos (
