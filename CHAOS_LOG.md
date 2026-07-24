@@ -178,3 +178,4 @@
 - `2026-07-24T16:37:51.916884+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
 - `2026-07-24T16:38:36.245842+00:00` **chaos** — incidente #1 — UsuarioIndisponivelException em /api/v1/pix/transacoes
 - `2026-07-24T16:40:21.785344+00:00` **fix** — incidente #1 resolvido — diagnostico: a causa raiz provavel é que o servico de usuarios esta indisponivel, o que impede a validacao do titular de uma chave PIX antes de uma transacao, conforme descrito no plano de implementacao do usuario
+- `2026-07-24T16:47:59.223628+00:00` **chaos-toggle** — reintroduz bug real (NPE) em UserMapper.toResponse
