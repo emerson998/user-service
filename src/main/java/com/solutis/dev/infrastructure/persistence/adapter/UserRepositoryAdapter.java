@@ -35,6 +35,11 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByCpf(String cpf) {
+        return jpaRepository.findByCpf(cpf).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
     public List<User> findAll() {
         return jpaRepository.findAll().stream().map(UserEntityMapper::toDomain).toList();
     }

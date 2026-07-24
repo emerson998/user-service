@@ -21,6 +21,9 @@ public class UserJpaEntity {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
     private String passwordHash;
 
     private String phone;
@@ -32,11 +35,12 @@ public class UserJpaEntity {
     protected UserJpaEntity() {
     }
 
-    public UserJpaEntity(Long id, String name, String email, String passwordHash, String phone, String bio,
-            boolean enabled) {
+    public UserJpaEntity(Long id, String name, String email, String cpf, String passwordHash, String phone,
+            String bio, boolean enabled) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.cpf = cpf;
         this.passwordHash = passwordHash;
         this.phone = phone;
         this.bio = bio;
@@ -53,6 +57,10 @@ public class UserJpaEntity {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     public String getPasswordHash() {

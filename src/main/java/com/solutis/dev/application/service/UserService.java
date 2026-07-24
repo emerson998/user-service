@@ -34,6 +34,9 @@ public class UserService implements UserUseCase {
         if (userRepository.findByEmail(request.email()).isPresent()) {
             throw new DuplicateResourceException("Usuário com e-mail " + request.email() + " já existe");
         }
+        if (userRepository.findByCpf(request.cpf()).isPresent()) {
+            throw new DuplicateResourceException("Usuário com CPF " + request.cpf() + " já existe");
+        }
         String passwordHash = passwordEncoderPort.encode(request.password());
         User saved = userRepository.save(UserMapper.toDomain(request, passwordHash));
         return UserMapper.toResponse(saved);
@@ -66,6 +69,9 @@ public class UserService implements UserUseCase {
     private UserResponse createFromUpsert(UserUpsertRequest request) {
         if (request.password() == null || request.password().isBlank()) {
             throw new IllegalArgumentException("password é obrigatório para criar um novo usuário");
+        }
+        if (userRepository.findByCpf(request.cpf()).isPresent()) {
+            throw new DuplicateResourceException("Usuário com CPF " + request.cpf() + " já existe");
         }
         String passwordHash = passwordEncoderPort.encode(request.password());
         User saved = userRepository.save(UserMapper.toDomain(request, passwordHash));

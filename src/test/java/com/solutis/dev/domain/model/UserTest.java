@@ -8,11 +8,12 @@ class UserTest {
 
     @Test
     void createNew_shouldInitializeWithEnabledTrueAndNoContactInfo() {
-        User user = User.createNew("Alice", "alice@example.com", "hashed-password");
+        User user = User.createNew("Alice", "alice@example.com", "12345678909", "hashed-password");
 
         assertThat(user.getId()).isNull();
         assertThat(user.getName()).isEqualTo("Alice");
         assertThat(user.getEmail()).isEqualTo("alice@example.com");
+        assertThat(user.getCpf()).isEqualTo("12345678909");
         assertThat(user.getPasswordHash()).isEqualTo("hashed-password");
         assertThat(user.getPhone()).isNull();
         assertThat(user.getBio()).isNull();
@@ -21,7 +22,7 @@ class UserTest {
 
     @Test
     void updateProfile_shouldUpdateNamePhoneAndBio() {
-        User user = User.createNew("Alice", "alice@example.com", "hashed-password");
+        User user = User.createNew("Alice", "alice@example.com", "12345678909", "hashed-password");
 
         user.updateProfile("Alice Smith", "+55 11 99999-0000", "Software engineer");
 
@@ -32,7 +33,7 @@ class UserTest {
 
     @Test
     void changePassword_shouldUpdatePasswordHash() {
-        User user = User.createNew("Alice", "alice@example.com", "old-hash");
+        User user = User.createNew("Alice", "alice@example.com", "12345678909", "old-hash");
 
         user.changePassword("new-hash");
 
@@ -41,7 +42,7 @@ class UserTest {
 
     @Test
     void activateAndDeactivate_shouldToggleEnabledFlag() {
-        User user = new User(1L, "Alice", "alice@example.com", "hash", null, null, false);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false);
 
         user.activate();
         assertThat(user.isEnabled()).isTrue();

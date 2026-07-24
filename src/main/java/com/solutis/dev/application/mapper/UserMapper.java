@@ -11,16 +11,16 @@ public final class UserMapper {
     }
 
     public static User toDomain(UserRequest request, String passwordHash) {
-        return User.createNew(request.name(), request.email(), passwordHash);
+        return User.createNew(request.name(), request.email(), request.cpf(), passwordHash);
     }
 
     public static User toDomain(UserUpsertRequest request, String passwordHash) {
-        return User.createNew(request.name(), request.email(), passwordHash);
+        return User.createNew(request.name(), request.email(), request.cpf(), passwordHash);
     }
 
     public static UserResponse toResponse(User user) {
         return new UserResponse(
-                user.getId(), user.getName(), user.getEmail(),
+                user.getId(), user.getName(), user.getEmail(), user.getCpf(),
                 user.getPhone(), user.getBio(), user.isEnabled());
     }
 }

@@ -23,7 +23,7 @@ domínio `User` já existe.
 
 - [x] [18 — API Versioning](18-api-versioning.md) — expor as rotas com prefixo de versão (ex.: `/v1/users`).
 - [x] [19 — Upsert Endpoint](19-upsert-endpoint.md) — endpoint que atualiza o usuário se existir, ou cria um novo se não existir.
-- [ ] [20 — Data Validation](20-data-validation.md) — validações obrigatórias de campo (ex.: `name`, `email`).
+- [x] [20 — Data Validation](20-data-validation.md) — validações obrigatórias de campo (ex.: `name`, `email`).
 - [ ] [21 — Uniqueness Checks](21-uniqueness-checks.md) — validar unicidade de e-mail e CPF antes de executar o upsert.
 - [ ] [22 — Optimistic Locking](22-optimistic-locking.md) — `@Version` na entidade de usuário.
 - [ ] [23 — Soft Delete](23-soft-delete.md) — remoção lógica via campo de status (ex.: `active`/`deletedAt`).
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 2/34 concluídas.
+Status geral: 3/34 concluídas.
 
 ## Ordem e dependências
 

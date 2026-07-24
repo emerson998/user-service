@@ -1,6 +1,6 @@
 # Task 20 — Data Validation
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 19.
 
@@ -30,11 +30,20 @@ fechando qualquer lacuna deixada pela task 19.
   mapeia `MethodArgumentNotValidException` → `400`) cobre o novo endpoint
   sem alteração — não deve ser necessário criar handler novo.
 
+## Nota de implementação
+
+`UserUpsertRequest` já nasceu (task 19) com `@NotBlank name` e
+`@NotBlank @Email email`, e `UserController.upsert` já usava `@Valid`.
+`GlobalExceptionHandler.handleValidation` já cobria o caso sem alteração.
+Esta task foi, na prática, a auditoria + os testes de controller que
+confirmam isso.
+
 ## Critérios de aceite
 
-- [ ] `PUT /api/v1/users/upsert` com `name`/`email` ausentes ou `email`
+- [x] `PUT /api/v1/users/upsert` com `name`/`email` ausentes ou `email`
       malformado devolve `400` com mensagem de campo (mesmo formato dos
       demais endpoints).
-- [ ] Nenhum DTO de usuário aceita `name`/`email` em branco.
-- [ ] Coberto por teste em `UserControllerTest` (caso de validação do
-      upsert).
+- [x] Nenhum DTO de usuário aceita `name`/`email` em branco.
+- [x] Coberto por teste em `UserControllerTest` (caso de validação do
+      upsert). **Confirmado pelo usuário**: `mvn clean compile` e
+      `mvn test` rodados manualmente no IntelliJ.

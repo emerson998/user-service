@@ -40,9 +40,10 @@ class UserServiceTest {
 
     @Test
     void create_shouldEncodePasswordAndSaveUser_whenEmailNotTaken() {
-        UserRequest request = new UserRequest("Alice", "alice@example.com", "password123", null, null);
-        User saved = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        UserRequest request = new UserRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
+        User saved = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true);
         when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+        when(userRepository.findByCpf(request.cpf())).thenReturn(Optional.empty());
         when(passwordEncoderPort.encode(request.password())).thenReturn("hashed");
         when(userRepository.save(any(User.class))).thenReturn(saved);
 
@@ -50,15 +51,29 @@ class UserServiceTest {
 
         assertThat(response.id()).isEqualTo(1L);
         assertThat(response.name()).isEqualTo("Alice");
+        assertThat(response.cpf()).isEqualTo("12345678909");
         verify(passwordEncoderPort).encode("password123");
         verify(userRepository).save(any(User.class));
     }
 
     @Test
     void create_shouldThrowDuplicateResourceException_whenEmailAlreadyExists() {
-        UserRequest request = new UserRequest("Alice", "alice@example.com", "password123", null, null);
-        User existing = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        UserRequest request = new UserRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
+        User existing = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true);
         when(userRepository.findByEmail(request.email())).thenReturn(Optional.of(existing));
+
+        assertThatThrownBy(() -> userService.create(request))
+                .isInstanceOf(DuplicateResourceException.class);
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void create_shouldThrowDuplicateResourceException_whenCpfAlreadyExists() {
+        UserRequest request = new UserRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
+        User existing = new User(2L, "Bob", "bob@example.com", "12345678909", "hashed", null, null, true);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+        when(userRepository.findByCpf(request.cpf())).thenReturn(Optional.of(existing));
 
         assertThatThrownBy(() -> userService.create(request))
                 .isInstanceOf(DuplicateResourceException.class);
@@ -85,7 +100,7 @@ class UserServiceTest {
 
     @Test
     void update_shouldUpdateProfile_whenUserExists() {
-        User existing = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        User existing = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true);
         UserUpdateRequest request = new UserUpdateRequest("Alice Smith", "+55 11 99999-0000", "bio");
         when(userRepository.findById(1L)).thenReturn(Optional.of(existing));
         when(userRepository.save(any(User.class))).thenReturn(existing);
@@ -99,9 +114,10 @@ class UserServiceTest {
 
     @Test
     void upsert_shouldCreateUser_whenEmailNotFoundAndPasswordProvided() {
-        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "password123", null, null);
-        User saved = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
+        User saved = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true);
         when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+        when(userRepository.findByCpf(request.cpf())).thenReturn(Optional.empty());
         when(passwordEncoderPort.encode(request.password())).thenReturn("hashed");
         when(userRepository.save(any(User.class))).thenReturn(saved);
 
@@ -114,7 +130,7 @@ class UserServiceTest {
 
     @Test
     void upsert_shouldThrowIllegalArgumentException_whenCreatingWithoutPassword() {
-        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", null, null, null);
+        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "12345678909", null, null, null);
         when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.upsert(request))
@@ -124,9 +140,23 @@ class UserServiceTest {
     }
 
     @Test
+    void upsert_shouldThrowDuplicateResourceException_whenCreatingWithCpfAlreadyTaken() {
+        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
+        User existing = new User(2L, "Bob", "bob@example.com", "12345678909", "hashed", null, null, true);
+        when(userRepository.findByEmail(request.email())).thenReturn(Optional.empty());
+        when(userRepository.findByCpf(request.cpf())).thenReturn(Optional.of(existing));
+
+        assertThatThrownBy(() -> userService.upsert(request))
+                .isInstanceOf(DuplicateResourceException.class);
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
     void upsert_shouldUpdateProfileWithoutChangingPassword_whenEmailExistsAndPasswordBlank() {
-        User existing = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
-        UserUpsertRequest request = new UserUpsertRequest("Alice Smith", "alice@example.com", null, "+55 11 99999-0000", "bio");
+        User existing = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true);
+        UserUpsertRequest request = new UserUpsertRequest(
+                "Alice Smith", "alice@example.com", "12345678909", null, "+55 11 99999-0000", "bio");
         when(userRepository.findByEmail(request.email())).thenReturn(Optional.of(existing));
         when(userRepository.save(any(User.class))).thenReturn(existing);
 
@@ -139,8 +169,9 @@ class UserServiceTest {
 
     @Test
     void upsert_shouldChangePassword_whenEmailExistsAndPasswordProvided() {
-        User existing = new User(1L, "Alice", "alice@example.com", "oldHash", null, null, true);
-        UserUpsertRequest request = new UserUpsertRequest("Alice", "alice@example.com", "newPassword123", null, null);
+        User existing = new User(1L, "Alice", "alice@example.com", "12345678909", "oldHash", null, null, true);
+        UserUpsertRequest request = new UserUpsertRequest(
+                "Alice", "alice@example.com", "12345678909", "newPassword123", null, null);
         when(userRepository.findByEmail(request.email())).thenReturn(Optional.of(existing));
         when(passwordEncoderPort.encode("newPassword123")).thenReturn("newHash");
         when(userRepository.save(any(User.class))).thenReturn(existing);
@@ -170,7 +201,7 @@ class UserServiceTest {
 
     @Test
     void listAll_shouldReturnMappedUsers_whenUsersExist() {
-        User user = new User(1L, "Alice", "alice@example.com", "hashed", null, null, true);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true);
         when(userRepository.findAll()).thenReturn(List.of(user));
 
         List<UserResponse> result = userService.listAll();

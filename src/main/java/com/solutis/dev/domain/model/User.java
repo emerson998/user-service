@@ -5,24 +5,26 @@ public class User {
     private final Long id;
     private String name;
     private final String email;
+    private final String cpf;
     private String passwordHash;
     private String phone;
     private String bio;
     private boolean enabled;
 
-    public User(Long id, String name, String email, String passwordHash, String phone, String bio,
+    public User(Long id, String name, String email, String cpf, String passwordHash, String phone, String bio,
             boolean enabled) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.cpf = cpf;
         this.passwordHash = passwordHash;
         this.phone = phone;
         this.bio = bio;
         this.enabled = enabled;
     }
 
-    public static User createNew(String name, String email, String passwordHash) {
-        return new User(null, name, email, passwordHash, null, null, true);
+    public static User createNew(String name, String email, String cpf, String passwordHash) {
+        return new User(null, name, email, cpf, passwordHash, null, null, true);
     }
 
     public void updateProfile(String name, String phone, String bio) {
@@ -53,6 +55,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     public String getPasswordHash() {
