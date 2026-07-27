@@ -38,10 +38,10 @@ domínio `User` já existe.
 ### 3. Notification Flag & Bulk Actions
 
 - [x] [28 — Notification Flag](28-notification-flag.md) — flag booleana na entidade de usuário para habilitar/desabilitar notificações.
-- [ ] [29 — Bulk Flag Activation Endpoint](29-bulk-flag-activation-endpoint.md) — endpoint para ativar a flag em lote, recebendo um array de ids no corpo.
-- [ ] [30 — Validation — Empty Array](30-bulk-validation-empty-array.md) — validar que o array de ids não vem vazio.
-- [ ] [31 — Validation — Duplicates & Existence](31-bulk-validation-duplicates-existence.md) — validar ausência de ids duplicados e existência de todos os usuários informados.
-- [ ] [32 — Dry-Run / Skip Persist Logic](32-dry-run-skip-persist-logic.md) — se a flag de dry-run vier ativa no payload, validar sem persistir.
+- [x] [29 — Bulk Flag Activation Endpoint](29-bulk-flag-activation-endpoint.md) — endpoint para ativar a flag em lote, recebendo um array de ids no corpo.
+- [x] [30 — Validation — Empty Array](30-bulk-validation-empty-array.md) — validar que o array de ids não vem vazio.
+- [x] [31 — Validation — Duplicates & Existence](31-bulk-validation-duplicates-existence.md) — validar ausência de ids duplicados e existência de todos os usuários informados.
+- [x] [32 — Dry-Run / Skip Persist Logic](32-dry-run-skip-persist-logic.md) — se a flag de dry-run vier ativa no payload, validar sem persistir.
 
 ### 4. Authentication, Session & Access Control
 
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 11/34 concluídas.
+Status geral: 15/34 concluídas.
 
 ## Ordem e dependências
 
@@ -146,6 +146,6 @@ silenciosamente):
   do arquivo dela.
 - Ao terminar, marque `[x] Concluída` e deixe avisado para o usuário que deve revisar a compilação e 
 - rodar os testes antes de seguir para a próxima task.
-- Se uma task revelar uma decisão de design não coberta pela seção
+- Se uma task revelar uma decisão de design não coberta pela seçãox
   [Decisões em aberto](#decisões-em-aberto) ou pelo `PLANO_IMPLEMENTACAO.md`,
   pare e resolva com o usuário antes de codificar.

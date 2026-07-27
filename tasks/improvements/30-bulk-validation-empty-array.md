@@ -1,6 +1,6 @@
 # Task 30 — Validation — Empty Array
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 29.
 
@@ -25,7 +25,7 @@ lote (task 29) não vem vazio nem nulo.
 
 ## Critérios de aceite
 
-- [ ] `POST /api/v1/users/notifications/activate` com `userIds: []` ou
+- [x] `POST /api/v1/users/notifications/activate` com `userIds: []` ou
       `userIds` ausente devolve `400`.
-- [ ] `POST` com pelo menos um id continua funcionando normalmente.
-- [ ] Coberto por `UserBulkNotificationControllerTest`.
+- [x] `POST` com pelo menos um id continua funcionando normalmente.
+- [x] Coberto por `UserBulkNotificationControllerTest`.

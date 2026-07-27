@@ -1,6 +1,6 @@
 # Task 31 — Validation — Duplicates & Existence
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 29, 21 (padrão de checagem de existência reaproveitado).
 
@@ -32,10 +32,10 @@ qualquer um deles.
 
 ## Critérios de aceite
 
-- [ ] `userIds` com duplicados → `400`, nenhuma ativação ocorre.
-- [ ] `userIds` com algum id inexistente → `404` (lista os ids não
+- [x] `userIds` com duplicados → `400`, nenhuma ativação ocorre.
+- [x] `userIds` com algum id inexistente → `404` (lista os ids não
       encontrados na mensagem), nenhuma ativação ocorre — nem para os ids
       válidos do mesmo payload.
-- [ ] `userIds` válido e sem duplicados segue o fluxo normal (task 29).
-- [ ] Coberto por `UserBulkNotificationServiceTest` (um caso por
+- [x] `userIds` válido e sem duplicados segue o fluxo normal (task 29).
+- [x] Coberto por `UserBulkNotificationServiceTest` (um caso por
       validação).

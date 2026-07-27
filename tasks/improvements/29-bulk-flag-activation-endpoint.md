@@ -1,6 +1,6 @@
 # Task 29 — Bulk Flag Activation Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 18, 28.
 
@@ -37,7 +37,7 @@ ids de usuário no corpo da requisição.
 
 ## Critérios de aceite
 
-- [ ] `POST /api/v1/users/notifications/activate` com uma lista de ids
+- [x] `POST /api/v1/users/notifications/activate` com uma lista de ids
       válidos ativa `notificationsEnabled` em todos eles.
-- [ ] Resposta inclui `activatedCount` correto.
-- [ ] Coberto por `UserBulkNotificationServiceTest`.
+- [x] Resposta inclui `activatedCount` correto.
+- [x] Coberto por `UserBulkNotificationServiceTest`.

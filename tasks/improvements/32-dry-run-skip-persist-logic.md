@@ -1,6 +1,6 @@
 # Task 32 — Dry-Run / Skip Persist Logic
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 29, 30, 31.
 
@@ -29,11 +29,11 @@ flag de notificação em nenhum usuário.
 
 ## Critérios de aceite
 
-- [ ] `dryRun: true` com payload válido devolve `200` com
+- [x] `dryRun: true` com payload válido devolve `200` com
       `activatedCount` correto e `dryRun: true`, mas nenhum usuário tem
       `notificationsEnabled` alterado no banco.
-- [ ] `dryRun: true` com payload inválido (vazio/duplicado/inexistente)
+- [x] `dryRun: true` com payload inválido (vazio/duplicado/inexistente)
       continua devolvendo o erro correspondente (tasks 30/31) — dry-run
       não amacia validação.
-- [ ] `dryRun: false` (ou ausente) mantém o comportamento das tasks 29–31.
-- [ ] Coberto por `UserBulkNotificationServiceTest` (dry-run não persiste).
+- [x] `dryRun: false` (ou ausente) mantém o comportamento das tasks 29–31.
+- [x] Coberto por `UserBulkNotificationServiceTest` (dry-run não persiste).
