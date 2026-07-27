@@ -48,3 +48,5 @@ expirado.
       200ms (instanciados diretamente no teste), em vez de
       `@TestPropertySource`, já que `AuthServiceTest` é um teste Mockito
       puro sem contexto Spring.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

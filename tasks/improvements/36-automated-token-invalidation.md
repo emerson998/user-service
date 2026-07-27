@@ -1,6 +1,6 @@
 # Task 36 — Automated Token Invalidation
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 35.
 
@@ -31,9 +31,12 @@ proativa, conforme pedido explicitamente no checklist original.
 
 ## Critérios de aceite
 
-- [ ] Job roda periodicamente sem lançar exceção (log de erro, se
+- [x] Job roda periodicamente sem lançar exceção (log de erro, se
       falhar, sem derrubar a aplicação).
-- [ ] Após o TTL (task 35) + um ciclo do job, o token não aparece mais no
+- [x] Após o TTL (task 35) + um ciclo do job, o token não aparece mais no
       cache nativo (verificável via teste com `CacheManager` injetado e
       `Thread.sleep`/`Awaitility`, ou invocando o método do job
       diretamente no teste).
+      Coberto por `TokenCleanupJobTest` (cache real com TTL de 100ms +
+      `cleanupExpiredTokens()` chamado diretamente, cache ausente, e
+      `CacheManager` lançando exceção).
