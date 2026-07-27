@@ -41,3 +41,5 @@ ids de usuário no corpo da requisição.
       válidos ativa `notificationsEnabled` em todos eles.
 - [x] Resposta inclui `activatedCount` correto.
 - [x] Coberto por `UserBulkNotificationServiceTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

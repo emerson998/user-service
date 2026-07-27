@@ -39,3 +39,5 @@ qualquer um deles.
 - [x] `userIds` válido e sem duplicados segue o fluxo normal (task 29).
 - [x] Coberto por `UserBulkNotificationServiceTest` (um caso por
       validação).
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

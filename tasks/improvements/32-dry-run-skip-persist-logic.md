@@ -37,3 +37,5 @@ flag de notificação em nenhum usuário.
       não amacia validação.
 - [x] `dryRun: false` (ou ausente) mantém o comportamento das tasks 29–31.
 - [x] Coberto por `UserBulkNotificationServiceTest` (dry-run não persiste).
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

@@ -29,3 +29,5 @@ lote (task 29) não vem vazio nem nulo.
       `userIds` ausente devolve `400`.
 - [x] `POST` com pelo menos um id continua funcionando normalmente.
 - [x] Coberto por `UserBulkNotificationControllerTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

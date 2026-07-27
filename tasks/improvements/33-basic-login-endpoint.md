@@ -1,6 +1,6 @@
 # Task 33 — Basic Login Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 18, baseline CRUD (`User`, `UserRepository`).
 
@@ -52,9 +52,14 @@ credenciais). Confirmar com o usuário se este comportamento literal é
 suficiente ou se deveria validar `password`/`passwordHash` do `User`
 antes de emitir o token.
 
+**Resolvido com o usuário**: comportamento literal confirmado — login
+recebe só `userId`, sem senha, mesmo sendo deliberadamente simplificado.
+
 ## Critérios de aceite
 
-- [ ] `POST /api/v1/auth/login` com um `userId` existente devolve `200`
+- [x] `POST /api/v1/auth/login` com um `userId` existente devolve `200`
       com um token UUID.
-- [ ] `userId` inexistente devolve `404`.
-- [ ] Coberto por `AuthServiceTest`.
+- [x] `userId` inexistente devolve `404`.
+- [x] Coberto por `AuthServiceTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.
