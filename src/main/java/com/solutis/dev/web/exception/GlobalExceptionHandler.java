@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.InvalidFileException;
+import com.solutis.dev.domain.exception.InvalidTokenException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 
 @RestControllerAdvice
@@ -47,6 +48,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidFileException.class)
     public ResponseEntity<ErrorResponse> handleInvalidFile(InvalidFileException ex, WebRequest request) {
         return build(HttpStatus.valueOf(422), ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidToken(InvalidTokenException ex, WebRequest request) {
+        return build(HttpStatus.UNAUTHORIZED, ex.getMessage(), request);
     }
 
     @ExceptionHandler(Exception.class)

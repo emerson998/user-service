@@ -11,6 +11,7 @@ import com.solutis.dev.application.dto.auth.LoginResponse;
 import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.application.port.out.TokenStorePort;
+import com.solutis.dev.domain.exception.InvalidTokenException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.repository.UserRepository;
 
@@ -42,5 +43,11 @@ public class AuthService implements AuthUseCase {
         return tokenStorePort.resolve(token)
                 .map(userId -> new TokenStatusResponse(true, userId))
                 .orElseGet(() -> new TokenStatusResponse(false, null));
+    }
+
+    @Override
+    public Long requireValidToken(String token) {
+        return tokenStorePort.resolve(token)
+                .orElseThrow(() -> new InvalidTokenException("Token ausente, expirado ou inválido"));
     }
 }

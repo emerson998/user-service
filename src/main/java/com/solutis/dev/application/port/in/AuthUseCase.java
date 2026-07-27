@@ -9,4 +9,6 @@ public interface AuthUseCase {
     LoginResponse login(LoginRequest request);
 
     TokenStatusResponse lookup(String token);
+
+    Long requireValidToken(String token);
 }

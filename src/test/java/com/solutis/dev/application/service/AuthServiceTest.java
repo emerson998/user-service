@@ -9,20 +9,26 @@ import static org.mockito.Mockito.when;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.cache.caffeine.CaffeineCacheManager;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.solutis.dev.application.dto.auth.LoginRequest;
 import com.solutis.dev.application.dto.auth.LoginResponse;
 import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.out.TokenStorePort;
+import com.solutis.dev.domain.exception.InvalidTokenException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.model.User;
 import com.solutis.dev.domain.repository.UserRepository;
+import com.solutis.dev.infrastructure.config.CacheConfig;
+import com.solutis.dev.infrastructure.security.CacheTokenStoreAdapter;
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
@@ -86,5 +92,41 @@ class AuthServiceTest {
 
         assertThat(response.valid()).isFalse();
         assertThat(response.userId()).isNull();
+    }
+
+    @Test
+    void requireValidToken_shouldReturnUserId_whenTokenIsValid() {
+        when(tokenStorePort.resolve("valid-token")).thenReturn(Optional.of(1L));
+
+        Long userId = authService.requireValidToken("valid-token");
+
+        assertThat(userId).isEqualTo(1L);
+    }
+
+    @Test
+    void requireValidToken_shouldThrowInvalidTokenException_whenTokenIsMissingOrExpired() {
+        when(tokenStorePort.resolve("unknown-token")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> authService.requireValidToken("unknown-token"))
+                .isInstanceOf(InvalidTokenException.class);
+    }
+
+    @Test
+    void requireValidToken_shouldThrowInvalidTokenException_afterTokenTtlElapses() throws InterruptedException {
+        long shortTtlSeconds = 0L;
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(CacheConfig.AUTH_TOKENS_CACHE);
+        cacheManager.setCaffeine(Caffeine.newBuilder().expireAfterWrite(200, TimeUnit.MILLISECONDS));
+        CacheTokenStoreAdapter realTokenStore = new CacheTokenStoreAdapter(cacheManager);
+        AuthService authServiceWithRealCache = new AuthService(userRepository, realTokenStore, shortTtlSeconds);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true, null, false);
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+
+        LoginResponse loginResponse = authServiceWithRealCache.login(new LoginRequest(1L));
+        assertThat(authServiceWithRealCache.requireValidToken(loginResponse.token())).isEqualTo(1L);
+
+        Thread.sleep(500);
+
+        assertThatThrownBy(() -> authServiceWithRealCache.requireValidToken(loginResponse.token()))
+                .isInstanceOf(InvalidTokenException.class);
     }
 }

@@ -47,7 +47,7 @@ domínio `User` já existe.
 
 - [x] [33 — Basic Login Endpoint](33-basic-login-endpoint.md) — login recebendo um id de usuário e devolvendo um token UUID válido (comportamento de não validar senha documentado no Swagger e no arquivo da task).
 - [x] [34 — UUID Lookup Endpoint](34-uuid-lookup-endpoint.md) — endpoint para consultar status/detalhes de um token UUID ativo.
-- [ ] [35 — Token Expiration](35-token-expiration.md) — TTL configurável para o token, `401` após expirar.
+- [x] [35 — Token Expiration](35-token-expiration.md) — TTL configurável para o token, `401` após expirar.
 - [ ] [36 — Automated Token Invalidation](36-automated-token-invalidation.md) — job agendado (cron/scheduler) para expurgar tokens expirados.
 - [ ] [37 — Logout Endpoint](37-logout-endpoint.md) — revoga/invalida o token ativo manualmente.
 - [ ] [38 — Rate Limiting](38-rate-limiting.md) — rate limit no endpoint de login, para mitigar força bruta.
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 17/34 concluídas.
+Status geral: 18/34 concluídas.
 
 ## Ordem e dependências
 

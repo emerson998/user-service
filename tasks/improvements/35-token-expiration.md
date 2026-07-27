@@ -1,6 +1,6 @@
 # Task 35 — Token Expiration
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 33.
 
@@ -39,9 +39,12 @@ expirado.
 
 ## Critérios de aceite
 
-- [ ] Token expirado (TTL configurado baixo em teste) → endpoints que
+- [x] Token expirado (TTL configurado baixo em teste) → endpoints que
       exigem token (task 37) devolvem `401`.
-- [ ] `GET /api/v1/auth/tokens/{token}` continua respondendo `200` mesmo
+- [x] `GET /api/v1/auth/tokens/{token}` continua respondendo `200` mesmo
       para token expirado (`valid: false`, não `401`).
-- [ ] Coberto por `AuthServiceTest` com TTL reduzido via
-      `@TestPropertySource`.
+- [x] Coberto por `AuthServiceTest` com TTL reduzido — implementado com
+      um `CacheTokenStoreAdapter`/`CaffeineCacheManager` reais e TTL de
+      200ms (instanciados diretamente no teste), em vez de
+      `@TestPropertySource`, já que `AuthServiceTest` é um teste Mockito
+      puro sem contexto Spring.
