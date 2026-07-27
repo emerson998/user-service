@@ -56,7 +56,7 @@ domínio `User` já existe.
 ### 5. Data Retrieval, Caching & Resilience
 
 - [x] [40 — Pagination & Filtering](40-pagination-filtering.md) — paginação e filtros na listagem de usuários.
-- [ ] [41 — Database Caching](41-database-caching.md) — camada de cache (ex.: Redis ou cache L2) para as consultas.
+- [x] [41 — Database Caching](41-database-caching.md) — camada de cache (ex.: Redis ou cache L2) para as consultas.
 - [ ] [42 — Database Fallback](42-database-fallback.md) — conexão secundária de fallback caso a instância principal (PostgreSQL) fique indisponível.
 - [ ] [43 — Service Layer Retry Logic](43-service-layer-retry-logic.md) — retry automático no service layer para erros transitórios de conexão com o banco.
 
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 23/34 concluídas.
+Status geral: 24/34 concluídas.
 
 ## Ordem e dependências
 

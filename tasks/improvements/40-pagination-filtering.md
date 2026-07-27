@@ -66,3 +66,5 @@ manter as duas seria uma abstração sem uso real.
 - [x] Usuário soft-deleted (task 23) nunca aparece, com ou sem filtro
       (`Specification` sempre aplica `deletedAt IS NULL`).
 - [x] Coberto por `UserServiceTest`/`UserControllerTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

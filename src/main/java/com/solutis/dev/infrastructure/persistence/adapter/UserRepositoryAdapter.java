@@ -3,6 +3,8 @@ package com.solutis.dev.infrastructure.persistence.adapter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,7 @@ import com.solutis.dev.domain.repository.PageQuery;
 import com.solutis.dev.domain.repository.PageResult;
 import com.solutis.dev.domain.repository.UserFilter;
 import com.solutis.dev.domain.repository.UserRepository;
+import com.solutis.dev.infrastructure.config.CacheConfig;
 import com.solutis.dev.infrastructure.persistence.entity.UserJpaEntity;
 import com.solutis.dev.infrastructure.persistence.mapper.UserEntityMapper;
 import com.solutis.dev.infrastructure.persistence.repository.UserJpaRepository;
@@ -29,6 +32,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    @CachePut(cacheNames = CacheConfig.USERS_CACHE, key = "#result.id")
     public User save(User user) {
         UserJpaEntity entity = user.getId() == null
                 ? UserEntityMapper.toEntity(user)
@@ -44,6 +48,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    @Cacheable(cacheNames = CacheConfig.USERS_CACHE, key = "#id")
     public Optional<User> findById(Long id) {
         return jpaRepository.findByIdAndDeletedAtIsNull(id).map(UserEntityMapper::toDomain);
     }

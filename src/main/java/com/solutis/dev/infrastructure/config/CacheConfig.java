@@ -16,11 +16,17 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 public class CacheConfig {
 
     public static final String AUTH_TOKENS_CACHE = "authTokens";
+    public static final String USERS_CACHE = "users";
 
     @Bean
-    public CacheManager cacheManager(@Value("${app.auth.token-ttl-seconds}") long tokenTtlSeconds) {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager(AUTH_TOKENS_CACHE);
-        cacheManager.setCaffeine(Caffeine.newBuilder().expireAfterWrite(tokenTtlSeconds, TimeUnit.SECONDS));
+    public CacheManager cacheManager(
+            @Value("${app.auth.token-ttl-seconds}") long tokenTtlSeconds,
+            @Value("${app.cache.users-ttl-seconds}") long usersTtlSeconds) {
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager();
+        cacheManager.registerCustomCache(AUTH_TOKENS_CACHE,
+                Caffeine.newBuilder().expireAfterWrite(tokenTtlSeconds, TimeUnit.SECONDS).build());
+        cacheManager.registerCustomCache(USERS_CACHE,
+                Caffeine.newBuilder().expireAfterWrite(usersTtlSeconds, TimeUnit.SECONDS).build());
         return cacheManager;
     }
 }
