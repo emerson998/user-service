@@ -35,3 +35,5 @@ Endpoint para revogar/invalidar manualmente um token ativo.
       ausente/expirado lança `InvalidTokenException`) e por
       `AuthControllerTest` (204 com `Bearer`, 401 sem header/header
       malformado/token inválido).
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

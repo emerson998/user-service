@@ -1,6 +1,6 @@
 # Task 38 — Rate Limiting
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 33.
 
@@ -35,7 +35,20 @@ força bruta.
 
 ## Critérios de aceite
 
-- [ ] Mais de `app.auth.login-max-attempts` tentativas de login do mesmo
+- [x] Mais de `app.auth.login-max-attempts` tentativas de login do mesmo
       IP dentro da janela → `429` a partir da tentativa excedente.
-- [ ] Login legítimo dentro do limite continua funcionando.
-- [ ] Coberto por `LoginRateLimiterTest`/`AuthControllerTest`.
+- [x] Login legítimo dentro do limite continua funcionando.
+- [x] Coberto por `LoginRateLimiterTest`/`AuthControllerTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.
+
+## Nota de implementação
+
+`LoginRateLimiter` mantém seu próprio `com.github.benmanes.caffeine.cache.Cache`
+interno (construído diretamente no construtor via `Caffeine.newBuilder()`),
+em vez de registrar um cache nomeado no `CacheManager`/`CacheConfig` da task
+33 — evita que `CacheConfig` precise gerenciar dois caches com TTLs
+diferentes (`authTokens` e `loginAttempts`) através da mesma
+`CaffeineCacheManager.setCaffeine(...)`, que aplica uma única config a
+todos os caches que gerencia. Mantém a mesma tecnologia (Caffeine), só não
+passa pela abstração `org.springframework.cache`.

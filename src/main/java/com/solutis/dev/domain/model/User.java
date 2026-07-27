@@ -14,9 +14,10 @@ public class User {
     private boolean enabled;
     private Instant deletedAt;
     private boolean notificationsEnabled;
+    private final Role role;
 
     public User(Long id, String name, String email, String cpf, String passwordHash, String phone, String bio,
-            boolean enabled, Instant deletedAt, boolean notificationsEnabled) {
+            boolean enabled, Instant deletedAt, boolean notificationsEnabled, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -27,10 +28,11 @@ public class User {
         this.enabled = enabled;
         this.deletedAt = deletedAt;
         this.notificationsEnabled = notificationsEnabled;
+        this.role = role;
     }
 
     public static User createNew(String name, String email, String cpf, String passwordHash) {
-        return new User(null, name, email, cpf, passwordHash, null, null, true, null, false);
+        return new User(null, name, email, cpf, passwordHash, null, null, true, null, false, Role.USER);
     }
 
     public void updateProfile(String name, String phone, String bio) {
@@ -105,5 +107,9 @@ public class User {
 
     public boolean isNotificationsEnabled() {
         return notificationsEnabled;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }

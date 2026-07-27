@@ -50,8 +50,8 @@ domínio `User` já existe.
 - [x] [35 — Token Expiration](35-token-expiration.md) — TTL configurável para o token, `401` após expirar.
 - [x] [36 — Automated Token Invalidation](36-automated-token-invalidation.md) — job agendado (cron/scheduler) para expurgar tokens expirados.
 - [x] [37 — Logout Endpoint](37-logout-endpoint.md) — revoga/invalida o token ativo manualmente.
-- [ ] [38 — Rate Limiting](38-rate-limiting.md) — rate limit no endpoint de login, para mitigar força bruta.
-- [ ] [39 — Role-Based Access Control (RBAC)](39-rbac.md) — papéis e permissões básicas (ex.: `ADMIN` vs `USER`).
+- [x] [38 — Rate Limiting](38-rate-limiting.md) — rate limit no endpoint de login, para mitigar força bruta.
+- [x] [39 — Role-Based Access Control (RBAC)](39-rbac.md) — papéis e permissões básicas (ex.: `ADMIN` vs `USER`).
 
 ### 5. Data Retrieval, Caching & Resilience
 
@@ -74,7 +74,7 @@ domínio `User` já existe.
 - [ ] [50 — Unit Tests](50-unit-tests.md) — cobrindo upsert de usuário, import/export de CSV e ativação da flag de notificação.
 - [ ] [51 — Integration Tests](51-integration-tests.md) — cobrindo login, emissão de token UUID, expiração e endpoints protegidos.
 
-Status geral: 20/34 concluídas.
+Status geral: 22/34 concluídas.
 
 ## Ordem e dependências
 

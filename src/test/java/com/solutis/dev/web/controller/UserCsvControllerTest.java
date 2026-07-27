@@ -21,8 +21,10 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.solutis.dev.application.dto.csv.CsvImportResult;
+import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.application.port.in.UserCsvUseCase;
 import com.solutis.dev.domain.exception.InvalidFileException;
+import com.solutis.dev.domain.repository.UserRepository;
 
 @WebMvcTest(UserCsvController.class)
 class UserCsvControllerTest {
@@ -32,6 +34,12 @@ class UserCsvControllerTest {
 
     @MockitoBean
     private UserCsvUseCase userCsvUseCase;
+
+    @MockitoBean
+    private AuthUseCase authUseCase;
+
+    @MockitoBean
+    private UserRepository userRepository;
 
     @Test
     void export_shouldReturn200WithCsvContentTypeAndAttachmentHeader() throws Exception {

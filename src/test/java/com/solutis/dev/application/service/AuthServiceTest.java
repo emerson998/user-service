@@ -27,6 +27,7 @@ import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.out.TokenStorePort;
 import com.solutis.dev.domain.exception.InvalidTokenException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
+import com.solutis.dev.domain.model.Role;
 import com.solutis.dev.domain.model.User;
 import com.solutis.dev.domain.repository.UserRepository;
 import com.solutis.dev.infrastructure.config.CacheConfig;
@@ -52,7 +53,7 @@ class AuthServiceTest {
 
     @Test
     void login_shouldReturnTokenAndExpiresAt_whenUserExists() {
-        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true, null, false);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true, null, false, Role.USER);
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(tokenStorePort.issue(1L)).thenReturn("11111111-1111-1111-1111-111111111111");
 
@@ -120,7 +121,7 @@ class AuthServiceTest {
         cacheManager.setCaffeine(Caffeine.newBuilder().expireAfterWrite(200, TimeUnit.MILLISECONDS));
         CacheTokenStoreAdapter realTokenStore = new CacheTokenStoreAdapter(cacheManager);
         AuthService authServiceWithRealCache = new AuthService(userRepository, realTokenStore, shortTtlSeconds);
-        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true, null, false);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true, null, false, Role.USER);
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         LoginResponse loginResponse = authServiceWithRealCache.login(new LoginRequest(1L));

@@ -24,7 +24,10 @@ import com.solutis.dev.application.dto.auth.LoginResponse;
 import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.domain.exception.InvalidTokenException;
+import com.solutis.dev.domain.exception.RateLimitExceededException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
+import com.solutis.dev.domain.repository.UserRepository;
+import com.solutis.dev.infrastructure.security.LoginRateLimiter;
 
 @WebMvcTest(AuthController.class)
 class AuthControllerTest {
@@ -34,6 +37,12 @@ class AuthControllerTest {
 
     @MockitoBean
     private AuthUseCase authUseCase;
+
+    @MockitoBean
+    private LoginRateLimiter loginRateLimiter;
+
+    @MockitoBean
+    private UserRepository userRepository;
 
     @Test
     void login_shouldReturn200WithToken_whenUserExists() throws Exception {
@@ -64,6 +73,17 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}"))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void login_shouldReturn429_whenRateLimitIsExceeded() throws Exception {
+        doThrow(new RateLimitExceededException("Limite de tentativas de login excedido para o IP 127.0.0.1"))
+                .when(loginRateLimiter).checkAndIncrement(any());
+
+        mockMvc.perform(post("/api/v1/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"userId\":1}"))
+                .andExpect(status().isTooManyRequests());
     }
 
     @Test

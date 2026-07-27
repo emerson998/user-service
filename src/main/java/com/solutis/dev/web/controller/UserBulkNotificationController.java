@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.solutis.dev.application.dto.user.BulkActionResult;
 import com.solutis.dev.application.dto.user.BulkNotificationActivationRequest;
 import com.solutis.dev.application.port.in.UserBulkNotificationUseCase;
+import com.solutis.dev.domain.model.Role;
 import com.solutis.dev.web.ApiRoutes;
+import com.solutis.dev.web.security.RequireRole;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,7 +29,9 @@ public class UserBulkNotificationController {
     }
 
     @PostMapping("/activate")
-    @Operation(summary = "Ativa a flag de notificações em lote")
+    @Operation(summary = "Ativa a flag de notificações em lote",
+            description = "Requer token de usuário com papel ADMIN (header 'Authorization: Bearer <token>').")
+    @RequireRole(Role.ADMIN)
     public ResponseEntity<BulkActionResult> activate(@Valid @RequestBody BulkNotificationActivationRequest request) {
         return ResponseEntity.ok(userBulkNotificationUseCase.activate(request));
     }

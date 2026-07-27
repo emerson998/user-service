@@ -20,6 +20,7 @@ class UserTest {
         assertThat(user.isEnabled()).isTrue();
         assertThat(user.isDeleted()).isFalse();
         assertThat(user.isNotificationsEnabled()).isFalse();
+        assertThat(user.getRole()).isEqualTo(Role.USER);
     }
 
     @Test
@@ -44,7 +45,8 @@ class UserTest {
 
     @Test
     void activateAndDeactivate_shouldToggleEnabledFlag() {
-        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false, null, false);
+        User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hash", null, null, false, null, false,
+                Role.USER);
 
         user.activate();
         assertThat(user.isEnabled()).isTrue();

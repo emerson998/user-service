@@ -1,6 +1,6 @@
 # Task 39 — Role-Based Access Control (RBAC)
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 33, 37.
 
@@ -51,13 +51,32 @@ Quais endpoints exigem qual papel não estava no checklist original —
 levantamento e confirmação com o usuário são pré-requisito antes de
 aplicar `@RequireRole` em qualquer controller existente.
 
+**Resolvido com o usuário**: apenas `POST /api/v1/users/notifications/activate`
+(task 29) recebeu `@RequireRole(Role.ADMIN)`. Nenhum outro endpoint
+existente foi restringido nesta task.
+
+## Nota de implementação — ripple em `@WebMvcTest`
+
+`WebMvcConfig implements WebMvcConfigurer` é automaticamente incluído por
+qualquer slice `@WebMvcTest` (o filtro padrão do Spring Boot inclui beans
+`WebMvcConfigurer`), então toda classe `@WebMvcTest` do projeto passou a
+precisar de `@MockitoBean` para `AuthUseCase` e `UserRepository` (as
+dependências do construtor de `WebMvcConfig`/`RoleAuthorizationInterceptor`),
+mesmo quando o controller testado não usa `@RequireRole`. Já ajustado em
+`UserControllerTest`, `UserCsvControllerTest`,
+`UserBulkNotificationControllerTest` (que também ganhou testes com header
+`Authorization: Bearer <token>` simulando ADMIN/USER) e `AuthControllerTest`
+(só precisou do `UserRepository`, já tinha `AuthUseCase`). **Qualquer nova
+classe `@WebMvcTest` criada em tasks futuras precisa dos mesmos dois
+`@MockitoBean`.**
+
 ## Critérios de aceite
 
-- [ ] Endpoint anotado com `@RequireRole(Role.ADMIN)` chamado por um
+- [x] Endpoint anotado com `@RequireRole(Role.ADMIN)` chamado por um
       token de usuário `USER` → `403`.
-- [ ] Mesmo endpoint chamado por um token de usuário `ADMIN` → funciona
+- [x] Mesmo endpoint chamado por um token de usuário `ADMIN` → funciona
       normalmente.
-- [ ] Endpoint sem `@RequireRole` continua acessível independente do
+- [x] Endpoint sem `@RequireRole` continua acessível independente do
       papel.
-- [ ] Coberto por `RoleAuthorizationInterceptorTest`/teste de integração
-      dedicado.
+- [x] Coberto por `RoleAuthorizationInterceptorTest`/teste de integração
+      dedicado (mais os casos 403/401 em `UserBulkNotificationControllerTest`).

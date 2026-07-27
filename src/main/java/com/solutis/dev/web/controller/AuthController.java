@@ -14,10 +14,12 @@ import com.solutis.dev.application.dto.auth.LoginResponse;
 import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.domain.exception.InvalidTokenException;
+import com.solutis.dev.infrastructure.security.LoginRateLimiter;
 import com.solutis.dev.web.ApiRoutes;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,16 +28,19 @@ import jakarta.validation.Valid;
 public class AuthController {
 
     private final AuthUseCase authUseCase;
+    private final LoginRateLimiter loginRateLimiter;
 
-    public AuthController(AuthUseCase authUseCase) {
+    public AuthController(AuthUseCase authUseCase, LoginRateLimiter loginRateLimiter) {
         this.authUseCase = authUseCase;
+        this.loginRateLimiter = loginRateLimiter;
     }
 
     @PostMapping("/login")
     @Operation(summary = "Login básico por id de usuário, devolve um token UUID",
             description = "Login simplificado: recebe apenas o id do usuário, sem senha. "
                     + "Não valida password/passwordHash — não é autenticação real por credenciais.")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+        loginRateLimiter.checkAndIncrement(httpRequest.getRemoteAddr());
         return ResponseEntity.ok(authUseCase.login(request));
     }
 

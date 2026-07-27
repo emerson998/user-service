@@ -24,9 +24,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.solutis.dev.application.dto.user.UserRequest;
 import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpsertRequest;
+import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.application.port.in.UserUseCase;
 import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
+import com.solutis.dev.domain.model.Role;
+import com.solutis.dev.domain.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(UserController.class)
@@ -40,10 +43,16 @@ class UserControllerTest {
     @MockitoBean
     private UserUseCase userUseCase;
 
+    @MockitoBean
+    private AuthUseCase authUseCase;
+
+    @MockitoBean
+    private UserRepository userRepository;
+
     @Test
     void create_shouldReturn201_whenRequestIsValid() throws Exception {
         UserRequest request = new UserRequest("Alice", "alice@example.com", "12345678909", "password123", null, null);
-        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false);
+        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false, Role.USER);
         when(userUseCase.create(any(UserRequest.class))).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/users")
@@ -105,7 +114,7 @@ class UserControllerTest {
     void upsert_shouldReturn200_whenRequestIsValid() throws Exception {
         UserUpsertRequest request = new UserUpsertRequest(
                 "Alice", "alice@example.com", "12345678909", "password123", null, null);
-        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false);
+        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false, Role.USER);
         when(userUseCase.upsert(any(UserUpsertRequest.class))).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/users/upsert")
@@ -182,7 +191,7 @@ class UserControllerTest {
 
     @Test
     void listAll_shouldReturn200WithUserList() throws Exception {
-        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false);
+        UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false, Role.USER);
         when(userUseCase.listAll()).thenReturn(List.of(response));
 
         mockMvc.perform(get("/api/v1/users"))

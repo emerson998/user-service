@@ -31,6 +31,7 @@ import com.solutis.dev.application.dto.user.UserUpsertRequest;
 import com.solutis.dev.application.port.in.UserUseCase;
 import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.InvalidFileException;
+import com.solutis.dev.domain.model.Role;
 import com.solutis.dev.domain.model.User;
 import com.solutis.dev.domain.repository.UserRepository;
 
@@ -55,7 +56,7 @@ class UserCsvServiceTest {
     @Test
     void exportToCsv_shouldWriteHeaderAndOneRowPerUser() throws IOException, CsvValidationException {
         User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed",
-                "+55 11 99999-0000", "bio", true, null, false);
+                "+55 11 99999-0000", "bio", true, null, false, Role.USER);
         when(userRepository.findAll()).thenReturn(List.of(user));
 
         byte[] csv = userCsvService.exportToCsv();
@@ -88,7 +89,7 @@ class UserCsvServiceTest {
     @Test
     void exportToCsv_shouldNeverIncludePasswordHash() {
         User user = new User(1L, "Alice", "alice@example.com", "12345678909", "super-secret-hash",
-                null, null, true, null, false);
+                null, null, true, null, false, Role.USER);
         when(userRepository.findAll()).thenReturn(List.of(user));
 
         String csv = new String(userCsvService.exportToCsv(), StandardCharsets.UTF_8);
@@ -104,8 +105,8 @@ class UserCsvServiceTest {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "users.csv", "text/csv", csv.getBytes(StandardCharsets.UTF_8));
         when(userUseCase.upsert(any(UserUpsertRequest.class)))
-                .thenReturn(new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false))
-                .thenReturn(new UserResponse(2L, "Bob", "bob@example.com", "98765432100", null, null, true, false));
+                .thenReturn(new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false, Role.USER))
+                .thenReturn(new UserResponse(2L, "Bob", "bob@example.com", "98765432100", null, null, true, false, Role.USER));
 
         CsvImportResult result = userCsvService.importFromCsv(file);
 
@@ -137,7 +138,7 @@ class UserCsvServiceTest {
             if (request.email().equals("user3@example.com") || request.email().equals("user7@example.com")) {
                 throw new DuplicateResourceException("Usuário com e-mail " + request.email() + " já existe");
             }
-            return new UserResponse(1L, request.name(), request.email(), request.cpf(), null, null, true, false);
+            return new UserResponse(1L, request.name(), request.email(), request.cpf(), null, null, true, false, Role.USER);
         });
 
         CsvImportResult result = userCsvService.importFromCsv(file);

@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.solutis.dev.application.dto.user.BulkActionResult;
 import com.solutis.dev.application.dto.user.BulkNotificationActivationRequest;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
+import com.solutis.dev.domain.model.Role;
 import com.solutis.dev.domain.model.User;
 import com.solutis.dev.domain.repository.UserRepository;
 
@@ -33,7 +34,7 @@ class UserBulkNotificationServiceTest {
 
     private User newUser(Long id) {
         return new User(id, "User " + id, "user" + id + "@example.com", "1234567890" + id,
-                "hashed", null, null, true, null, false);
+                "hashed", null, null, true, null, false, Role.USER);
     }
 
     @Test
