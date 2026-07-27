@@ -1,11 +1,12 @@
 package com.solutis.dev.application.port.in;
 
-import java.util.List;
-
 import com.solutis.dev.application.dto.user.UserRequest;
 import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpdateRequest;
 import com.solutis.dev.application.dto.user.UserUpsertRequest;
+import com.solutis.dev.domain.repository.PageQuery;
+import com.solutis.dev.domain.repository.PageResult;
+import com.solutis.dev.domain.repository.UserFilter;
 
 public interface UserUseCase {
 
@@ -17,7 +18,7 @@ public interface UserUseCase {
 
     UserResponse getById(Long id);
 
-    List<UserResponse> listAll();
+    PageResult<UserResponse> listAll(PageQuery pageQuery, UserFilter filter);
 
     void delete(Long id);
 }

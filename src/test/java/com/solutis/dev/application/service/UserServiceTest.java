@@ -25,6 +25,9 @@ import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.model.Role;
 import com.solutis.dev.domain.model.User;
+import com.solutis.dev.domain.repository.PageQuery;
+import com.solutis.dev.domain.repository.PageResult;
+import com.solutis.dev.domain.repository.UserFilter;
 import com.solutis.dev.domain.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -206,20 +209,41 @@ class UserServiceTest {
     }
 
     @Test
-    void listAll_shouldReturnEmptyList_whenNoUsersExist() {
-        when(userRepository.findAll()).thenReturn(List.of());
+    void listAll_shouldReturnEmptyPage_whenNoUsersExist() {
+        PageQuery pageQuery = new PageQuery(0, 20);
+        UserFilter filter = new UserFilter(null, null, null);
+        when(userRepository.findAll(pageQuery, filter)).thenReturn(new PageResult<>(List.of(), 0, 0));
 
-        assertThat(userService.listAll()).isEmpty();
+        PageResult<UserResponse> result = userService.listAll(pageQuery, filter);
+
+        assertThat(result.content()).isEmpty();
+        assertThat(result.totalElements()).isZero();
+        assertThat(result.totalPages()).isZero();
     }
 
     @Test
-    void listAll_shouldReturnMappedUsers_whenUsersExist() {
+    void listAll_shouldReturnMappedUsersWithPageMetadata_whenUsersExist() {
         User user = new User(1L, "Alice", "alice@example.com", "12345678909", "hashed", null, null, true, null, false, Role.USER);
-        when(userRepository.findAll()).thenReturn(List.of(user));
+        PageQuery pageQuery = new PageQuery(0, 20);
+        UserFilter filter = new UserFilter(null, null, null);
+        when(userRepository.findAll(pageQuery, filter)).thenReturn(new PageResult<>(List.of(user), 1, 1));
 
-        List<UserResponse> result = userService.listAll();
+        PageResult<UserResponse> result = userService.listAll(pageQuery, filter);
 
-        assertThat(result).hasSize(1);
-        assertThat(result.get(0).email()).isEqualTo("alice@example.com");
+        assertThat(result.content()).hasSize(1);
+        assertThat(result.content().get(0).email()).isEqualTo("alice@example.com");
+        assertThat(result.totalElements()).isEqualTo(1);
+        assertThat(result.totalPages()).isEqualTo(1);
+    }
+
+    @Test
+    void listAll_shouldPassPageQueryAndFilterThroughToRepository() {
+        PageQuery pageQuery = new PageQuery(2, 10);
+        UserFilter filter = new UserFilter("jo", null, true);
+        when(userRepository.findAll(pageQuery, filter)).thenReturn(new PageResult<>(List.of(), 0, 0));
+
+        userService.listAll(pageQuery, filter);
+
+        verify(userRepository).findAll(pageQuery, filter);
     }
 }

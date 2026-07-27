@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.solutis.dev.infrastructure.persistence.entity.UserJpaEntity;
 
-public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
+public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long>,
+        JpaSpecificationExecutor<UserJpaEntity> {
 
     Optional<UserJpaEntity> findByIdAndDeletedAtIsNull(Long id);
 

@@ -29,6 +29,9 @@ import com.solutis.dev.application.port.in.UserUseCase;
 import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.model.Role;
+import com.solutis.dev.domain.repository.PageQuery;
+import com.solutis.dev.domain.repository.PageResult;
+import com.solutis.dev.domain.repository.UserFilter;
 import com.solutis.dev.domain.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -190,13 +193,38 @@ class UserControllerTest {
     }
 
     @Test
-    void listAll_shouldReturn200WithUserList() throws Exception {
+    void listAll_shouldReturn200WithPagedUserList_whenNoParamsGiven() throws Exception {
         UserResponse response = new UserResponse(1L, "Alice", "alice@example.com", "12345678909", null, null, true, false, Role.USER);
-        when(userUseCase.listAll()).thenReturn(List.of(response));
+        when(userUseCase.listAll(new PageQuery(0, 20), new UserFilter(null, null, null)))
+                .thenReturn(new PageResult<>(List.of(response), 1, 1));
 
         mockMvc.perform(get("/api/v1/users"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(1));
+                .andExpect(jsonPath("$.content[0].id").value(1))
+                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.totalPages").value(1));
+    }
+
+    @Test
+    void listAll_shouldPassPageAndSizeParams_whenProvided() throws Exception {
+        when(userUseCase.listAll(new PageQuery(1, 5), new UserFilter(null, null, null)))
+                .thenReturn(new PageResult<>(List.of(), 0, 0));
+
+        mockMvc.perform(get("/api/v1/users").param("page", "1").param("size", "5"))
+                .andExpect(status().isOk());
+
+        verify(userUseCase).listAll(new PageQuery(1, 5), new UserFilter(null, null, null));
+    }
+
+    @Test
+    void listAll_shouldPassNameFilter_whenNameParamProvided() throws Exception {
+        when(userUseCase.listAll(new PageQuery(0, 20), new UserFilter("jo", null, null)))
+                .thenReturn(new PageResult<>(List.of(), 0, 0));
+
+        mockMvc.perform(get("/api/v1/users").param("name", "jo"))
+                .andExpect(status().isOk());
+
+        verify(userUseCase).listAll(new PageQuery(0, 20), new UserFilter("jo", null, null));
     }
 
     @Test

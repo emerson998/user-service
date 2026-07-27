@@ -1,7 +1,6 @@
 package com.solutis.dev.web.controller;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.solutis.dev.application.dto.user.UserRequest;
@@ -18,6 +18,9 @@ import com.solutis.dev.application.dto.user.UserResponse;
 import com.solutis.dev.application.dto.user.UserUpdateRequest;
 import com.solutis.dev.application.dto.user.UserUpsertRequest;
 import com.solutis.dev.application.port.in.UserUseCase;
+import com.solutis.dev.domain.repository.PageQuery;
+import com.solutis.dev.domain.repository.PageResult;
+import com.solutis.dev.domain.repository.UserFilter;
 import com.solutis.dev.web.ApiRoutes;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,9 +46,16 @@ public class UserController {
     }
 
     @GetMapping
-    @Operation(summary = "Lista todos os usuários")
-    public ResponseEntity<List<UserResponse>> listAll() {
-        return ResponseEntity.ok(userUseCase.listAll());
+    @Operation(summary = "Lista usuários paginados, com filtros opcionais de nome/e-mail/status")
+    public ResponseEntity<PageResult<UserResponse>> listAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) Boolean enabled) {
+        PageQuery pageQuery = new PageQuery(page, size);
+        UserFilter filter = new UserFilter(name, email, enabled);
+        return ResponseEntity.ok(userUseCase.listAll(pageQuery, filter));
     }
 
     @GetMapping("/{id}")

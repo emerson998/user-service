@@ -1,7 +1,5 @@
 package com.solutis.dev.application.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +13,9 @@ import com.solutis.dev.application.port.out.PasswordEncoderPort;
 import com.solutis.dev.domain.exception.DuplicateResourceException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.model.User;
+import com.solutis.dev.domain.repository.PageQuery;
+import com.solutis.dev.domain.repository.PageResult;
+import com.solutis.dev.domain.repository.UserFilter;
 import com.solutis.dev.domain.repository.UserRepository;
 
 @Service
@@ -88,10 +89,11 @@ public class UserService implements UserUseCase {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserResponse> listAll() {
-        return userRepository.findAll().stream()
-                .map(UserMapper::toResponse)
-                .toList();
+    public PageResult<UserResponse> listAll(PageQuery pageQuery, UserFilter filter) {
+        PageResult<User> result = userRepository.findAll(pageQuery, filter);
+        return new PageResult<>(
+                result.content().stream().map(UserMapper::toResponse).toList(),
+                result.totalElements(), result.totalPages());
     }
 
     @Override

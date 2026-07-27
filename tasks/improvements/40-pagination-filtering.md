@@ -1,6 +1,6 @@
 # Task 40 — Pagination & Filtering
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 23.
 
@@ -49,11 +49,20 @@ para o domínio — ver `AGENTS.md` § "Por que essa separação existe"
   existente, que continua sem argumentos para outros usos internos, se
   necessário, ou substituído — avaliar ao implementar).
 
+## Nota de implementação
+
+`UserUseCase.listAll()` sem argumentos foi **substituído** por
+`listAll(PageQuery, UserFilter)` (não mantido como sobrecarga) — nenhum
+outro código interno chamava a versão sem paginação (o export de CSV usa
+`userRepository.findAll()` diretamente, não passa por `UserUseCase`), então
+manter as duas seria uma abstração sem uso real.
+
 ## Critérios de aceite
 
-- [ ] `GET /api/v1/users?page=0&size=10` devolve no máximo 10 itens e os
+- [x] `GET /api/v1/users?page=0&size=10` devolve no máximo 10 itens e os
       metadados de paginação (`totalElements`, `totalPages`).
-- [ ] `GET /api/v1/users?name=jo` filtra por nome contendo "jo"
+- [x] `GET /api/v1/users?name=jo` filtra por nome contendo "jo"
       (case-insensitive).
-- [ ] Usuário soft-deleted (task 23) nunca aparece, com ou sem filtro.
-- [ ] Coberto por `UserServiceTest`/`UserControllerTest`.
+- [x] Usuário soft-deleted (task 23) nunca aparece, com ou sem filtro
+      (`Specification` sempre aplica `deletedAt IS NULL`).
+- [x] Coberto por `UserServiceTest`/`UserControllerTest`.

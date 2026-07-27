@@ -17,5 +17,7 @@ public interface UserRepository {
 
     List<User> findAll();
 
+    PageResult<User> findAll(PageQuery pageQuery, UserFilter filter);
+
     boolean existsById(Long id);
 }
