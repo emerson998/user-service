@@ -1,6 +1,6 @@
 # Task 34 — UUID Lookup Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 33.
 
@@ -28,7 +28,7 @@ UUID ativo.
 
 ## Critérios de aceite
 
-- [ ] Token recém-emitido (task 33) → `GET .../auth/tokens/{token}`
+- [x] Token recém-emitido (task 33) → `GET .../auth/tokens/{token}`
       devolve `valid: true` e o `userId` correspondente.
-- [ ] Token inexistente/já expirado devolve `valid: false`.
-- [ ] Coberto por `AuthServiceTest`.
+- [x] Token inexistente/já expirado devolve `valid: false`.
+- [x] Coberto por `AuthServiceTest`.

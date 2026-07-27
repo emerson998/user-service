@@ -2,6 +2,7 @@ package com.solutis.dev.web.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,6 +17,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.solutis.dev.application.dto.auth.LoginResponse;
+import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 
@@ -57,5 +59,25 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}"))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void lookup_shouldReturn200WithValidTrue_whenTokenExists() throws Exception {
+        when(authUseCase.lookup("valid-token")).thenReturn(new TokenStatusResponse(true, 1L));
+
+        mockMvc.perform(get("/api/v1/auth/tokens/valid-token"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.valid").value(true))
+                .andExpect(jsonPath("$.userId").value(1));
+    }
+
+    @Test
+    void lookup_shouldReturn200WithValidFalse_whenTokenDoesNotExist() throws Exception {
+        when(authUseCase.lookup("unknown-token")).thenReturn(new TokenStatusResponse(false, null));
+
+        mockMvc.perform(get("/api/v1/auth/tokens/unknown-token"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.valid").value(false))
+                .andExpect(jsonPath("$.userId").doesNotExist());
     }
 }

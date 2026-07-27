@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.solutis.dev.application.dto.auth.LoginRequest;
 import com.solutis.dev.application.dto.auth.LoginResponse;
+import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.out.TokenStorePort;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 import com.solutis.dev.domain.model.User;
@@ -65,5 +66,25 @@ class AuthServiceTest {
                 .isInstanceOf(ResourceNotFoundException.class);
 
         verify(tokenStorePort, never()).issue(anyLong());
+    }
+
+    @Test
+    void lookup_shouldReturnValidTrueWithUserId_whenTokenExists() {
+        when(tokenStorePort.resolve("valid-token")).thenReturn(Optional.of(1L));
+
+        TokenStatusResponse response = authService.lookup("valid-token");
+
+        assertThat(response.valid()).isTrue();
+        assertThat(response.userId()).isEqualTo(1L);
+    }
+
+    @Test
+    void lookup_shouldReturnValidFalseWithNullUserId_whenTokenDoesNotExist() {
+        when(tokenStorePort.resolve("unknown-token")).thenReturn(Optional.empty());
+
+        TokenStatusResponse response = authService.lookup("unknown-token");
+
+        assertThat(response.valid()).isFalse();
+        assertThat(response.userId()).isNull();
     }
 }

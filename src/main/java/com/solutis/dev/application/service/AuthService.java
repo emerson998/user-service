@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.solutis.dev.application.dto.auth.LoginRequest;
 import com.solutis.dev.application.dto.auth.LoginResponse;
+import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.in.AuthUseCase;
 import com.solutis.dev.application.port.out.TokenStorePort;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
@@ -34,5 +35,12 @@ public class AuthService implements AuthUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário", request.userId()));
         String token = tokenStorePort.issue(request.userId());
         return new LoginResponse(token, Instant.now().plusSeconds(tokenTtlSeconds));
+    }
+
+    @Override
+    public TokenStatusResponse lookup(String token) {
+        return tokenStorePort.resolve(token)
+                .map(userId -> new TokenStatusResponse(true, userId))
+                .orElseGet(() -> new TokenStatusResponse(false, null));
     }
 }
