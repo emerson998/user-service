@@ -57,3 +57,5 @@ cache, cada um com seu próprio `Caffeine` configurado. `TokenCleanupJob`
 - [x] Coberto por um teste de cache dedicado (`@SpringBootTest` com
       `CacheManager` injetado, confirmando hit/miss) —
       `UserRepositoryAdapterCacheTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.
