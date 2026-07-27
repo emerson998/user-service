@@ -32,3 +32,5 @@ UUID ativo.
       devolve `valid: true` e o `userId` correspondente.
 - [x] Token inexistente/já expirado devolve `valid: false`.
 - [x] Coberto por `AuthServiceTest`.
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

@@ -30,7 +30,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Login básico por id de usuário, devolve um token UUID")
+    @Operation(summary = "Login básico por id de usuário, devolve um token UUID",
+            description = "Login simplificado: recebe apenas o id do usuário, sem senha. "
+                    + "Não valida password/passwordHash — não é autenticação real por credenciais.")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authUseCase.login(request));
     }

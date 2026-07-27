@@ -45,7 +45,7 @@ domínio `User` já existe.
 
 ### 4. Authentication, Session & Access Control
 
-- [x] [33 — Basic Login Endpoint](33-basic-login-endpoint.md) — login recebendo um id de usuário e devolvendo um token UUID válido.
+- [x] [33 — Basic Login Endpoint](33-basic-login-endpoint.md) — login recebendo um id de usuário e devolvendo um token UUID válido (comportamento de não validar senha documentado no Swagger e no arquivo da task).
 - [x] [34 — UUID Lookup Endpoint](34-uuid-lookup-endpoint.md) — endpoint para consultar status/detalhes de um token UUID ativo.
 - [ ] [35 — Token Expiration](35-token-expiration.md) — TTL configurável para o token, `401` após expirar.
 - [ ] [36 — Automated Token Invalidation](36-automated-token-invalidation.md) — job agendado (cron/scheduler) para expurgar tokens expirados.
