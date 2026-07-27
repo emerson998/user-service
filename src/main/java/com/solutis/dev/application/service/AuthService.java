@@ -50,4 +50,10 @@ public class AuthService implements AuthUseCase {
         return tokenStorePort.resolve(token)
                 .orElseThrow(() -> new InvalidTokenException("Token ausente, expirado ou inválido"));
     }
+
+    @Override
+    public void logout(String token) {
+        requireValidToken(token);
+        tokenStorePort.invalidate(token);
+    }
 }

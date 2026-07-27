@@ -11,4 +11,6 @@ public interface AuthUseCase {
     TokenStatusResponse lookup(String token);
 
     Long requireValidToken(String token);
+
+    void logout(String token);
 }

@@ -3,7 +3,9 @@ package com.solutis.dev.application.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -128,5 +130,25 @@ class AuthServiceTest {
 
         assertThatThrownBy(() -> authServiceWithRealCache.requireValidToken(loginResponse.token()))
                 .isInstanceOf(InvalidTokenException.class);
+    }
+
+    @Test
+    void logout_shouldInvalidateToken_whenTokenIsValid() {
+        when(tokenStorePort.resolve("valid-token")).thenReturn(Optional.of(1L));
+
+        authService.logout("valid-token");
+
+        verify(tokenStorePort, times(1)).resolve("valid-token");
+        verify(tokenStorePort).invalidate("valid-token");
+    }
+
+    @Test
+    void logout_shouldThrowInvalidTokenException_whenTokenIsMissingOrExpired() {
+        when(tokenStorePort.resolve("unknown-token")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> authService.logout("unknown-token"))
+                .isInstanceOf(InvalidTokenException.class);
+
+        verify(tokenStorePort, never()).invalidate(anyString());
     }
 }

@@ -1,6 +1,9 @@
 package com.solutis.dev.web.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,6 +15,7 @@ import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.solutis.dev.application.dto.auth.LoginResponse;
 import com.solutis.dev.application.dto.auth.TokenStatusResponse;
 import com.solutis.dev.application.port.in.AuthUseCase;
+import com.solutis.dev.domain.exception.InvalidTokenException;
 import com.solutis.dev.domain.exception.ResourceNotFoundException;
 
 @WebMvcTest(AuthController.class)
@@ -79,5 +84,40 @@ class AuthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.valid").value(false))
                 .andExpect(jsonPath("$.userId").doesNotExist());
+    }
+
+    @Test
+    void logout_shouldReturn204_whenTokenIsValid() throws Exception {
+        mockMvc.perform(post("/api/v1/auth/logout")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer valid-token"))
+                .andExpect(status().isNoContent());
+
+        verify(authUseCase).logout("valid-token");
+    }
+
+    @Test
+    void logout_shouldReturn401_whenTokenIsInvalidOrExpired() throws Exception {
+        doThrow(new InvalidTokenException("Token expirado")).when(authUseCase).logout("expired-token");
+
+        mockMvc.perform(post("/api/v1/auth/logout")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer expired-token"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void logout_shouldReturn401_whenAuthorizationHeaderIsMissing() throws Exception {
+        mockMvc.perform(post("/api/v1/auth/logout"))
+                .andExpect(status().isUnauthorized());
+
+        verify(authUseCase, never()).logout(any());
+    }
+
+    @Test
+    void logout_shouldReturn401_whenAuthorizationHeaderIsNotBearer() throws Exception {
+        mockMvc.perform(post("/api/v1/auth/logout")
+                        .header(HttpHeaders.AUTHORIZATION, "Basic abc123"))
+                .andExpect(status().isUnauthorized());
+
+        verify(authUseCase, never()).logout(any());
     }
 }

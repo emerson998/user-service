@@ -40,3 +40,5 @@ proativa, conforme pedido explicitamente no checklist original.
       Coberto por `TokenCleanupJobTest` (cache real com TTL de 100ms +
       `cleanupExpiredTokens()` chamado diretamente, cache ausente, e
       `CacheManager` lançando exceção).
+      **Confirmado pelo usuário**: `mvn clean compile` e `mvn test`
+      rodados manualmente no IntelliJ.

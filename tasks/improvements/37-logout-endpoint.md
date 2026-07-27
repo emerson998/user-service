@@ -1,6 +1,6 @@
 # Task 37 — Logout Endpoint
 
-Status: [ ] Pendente
+Status: [x] Concluída
 
 Depende de: Task 33, 35.
 
@@ -27,8 +27,11 @@ Endpoint para revogar/invalidar manualmente um token ativo.
 
 ## Critérios de aceite
 
-- [ ] `POST /api/v1/auth/logout` com token válido → `200`/`204`, e uma
+- [x] `POST /api/v1/auth/logout` com token válido → `200`/`204`, e uma
       consulta seguinte em `GET /api/v1/auth/tokens/{token}` (task 34)
       passa a devolver `valid: false`.
-- [ ] `POST /api/v1/auth/logout` com token ausente/expirado → `401`.
-- [ ] Coberto por `AuthServiceTest`.
+- [x] `POST /api/v1/auth/logout` com token ausente/expirado → `401`.
+- [x] Coberto por `AuthServiceTest` (token válido invalida, token
+      ausente/expirado lança `InvalidTokenException`) e por
+      `AuthControllerTest` (204 com `Bearer`, 401 sem header/header
+      malformado/token inválido).
